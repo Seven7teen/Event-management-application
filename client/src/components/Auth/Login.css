@@ -1,0 +1,47 @@
+.login-screen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 30rem;
+    border-radius: 5%;
+    margin-top: 5%;
+    /* margin-right: 100px; */
+    min-width: 25%;
+    padding: 30px;
+    padding-top: 100px;
+    padding-bottom: 0;
+    background-color: #494dc4;
+    /* border: 2px solid #dadce0; */
+}
+.login-button{
+    background-color: "#ffffff";
+    color: "#000000";
+    border-top-left-radius:"50px";
+    border-bottom-left-radius:"50px";
+    border-top-right-radius:"50px";
+    border-bottom-right-radius:"50px";
+}
+.login-text{
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 5rem;
+}
+.login-image{
+    /* margin: 10% 2%; */
+    margin-top: -80px;
+    max-width: 90%;
+}
+.login-button{
+    margin-top: 10%;
+}
+.login-container{
+    display: flex;
+    margin: 3%;
+    margin-bottom: 0;
+    /* justify-content: space-around; */
+}
+.image-container{
+    max-width: 55%;
+    /* padding-left: 10%; */
+    /* margin-top: -50px; */
+}

@@ -1,0 +1,27 @@
+.sidebar{
+    background-color: #6f51ed;
+    /* max-width: 50px; */
+    border: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    /* min-height: 700px; */
+}
+
+.icon{
+    margin-top: 1rem;
+    height: 2rem;
+    width: 2rem;
+}
+
+.list{
+    margin-top: 80% !important;
+}
+
+.list-item{
+    padding-left: 17px !important;
+    padding-top: 10px !important;
+    margin-bottom: 20px !important;
+}
+.list-item:hover{
+    border-left: 3px solid #ffffff;
+}
