@@ -154,9 +154,12 @@ function Events() {
                 <SearchBar/>
                 <div className="main-block">
                 <div style={{display: "block", paddingLeft:"2%", paddingRight:"2%"}}>
-                    <div id="own" className="own" onClick={showOwn} style={{fontSize:"20px",padding:"3px",display:"inline-block",width:"100%",textAlign:"center", backgroundColor:"#a406b5"}}>
-                        Your Events
+                    <div id="public" className="public selectedList" onClick={showPublic} style={{fontSize:"20px",padding:"3px",display:"inline-block",width:"50%",textAlign:"center"}}>
+                        Public Holidays
                     </div>
+                    <div id="own" className="own" onClick={showOwn} style={{fontSize:"20px",padding:"3px",display:"inline-block",width:"50%",textAlign:"center"}}>
+                        Your Events
+                        </div>
                 </div>
                 {publicEve ? 
                     (<div className="event-list" style={{paddingLeft:"2%", paddingRight:"2%"}}>
