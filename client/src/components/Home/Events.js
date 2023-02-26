@@ -13,6 +13,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditEvent from '../Events/EditEvent';
 import { Redirect } from 'react-router';
+import { colors } from '@material-ui/core';
 // import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 const db = firebase.firestore();
@@ -153,10 +154,7 @@ function Events() {
                 <SearchBar/>
                 <div className="main-block">
                 <div style={{display: "block", paddingLeft:"2%", paddingRight:"2%"}}>
-                    <div id="public" className="public selectedList" onClick={showPublic} style={{fontSize:"20px",padding:"3px",display:"inline-block",width:"50%",textAlign:"center"}}>
-                        Public Holidays
-                    </div>
-                    <div id="own" className="own" onClick={showOwn} style={{fontSize:"20px",padding:"3px",display:"inline-block",width:"50%",textAlign:"center"}}>
+                    <div id="own" className="own" onClick={showOwn} style={{fontSize:"20px",padding:"3px",display:"inline-block",width:"100%",textAlign:"center", backgroundColor:"#a406b5"}}>
                         Your Events
                     </div>
                 </div>

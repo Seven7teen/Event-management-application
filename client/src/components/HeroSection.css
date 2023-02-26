@@ -41,7 +41,7 @@
 }
 
 .top-line {
-  color: #ffd54f;
+  color: #2f2d27;
   font-size: 16px;
   line-height: 16px;
   font-weight: 700;
@@ -55,7 +55,7 @@
   font-size: 48px;
   line-height: 1.1;
   font-weight: 600;
-  color: #f7f8fa;
+  color: #0d56e7;
 }
 
 .dark {
@@ -63,7 +63,16 @@
 }
 
 .darkBg {
-  background-color: #494dc4;
+  background-image: url("assets/bg_2.jpg");
+
+  /* Set a specific height */
+  min-height: 500px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .home__hero-subtitle {

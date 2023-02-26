@@ -17,12 +17,12 @@ function Footer() {
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
-          Download Calwin for Android from Playstore
+          Access EvenTo from any where
         </p>
         <div className='input-areas'>
           
             <Button buttonStyle='btn--outline'>
-            <FaGooglePlay /> Playstore
+            <FaGooglePlay /> WebLink
             </Button>
         </div>
       </section>
@@ -31,10 +31,10 @@ function Footer() {
           <div className='footer-logo'>
             <Link to='/' className='social-logo'>
               <MdFingerprint className='navbar-icon' />
-              CalWin
+              EvenTo
             </Link>
           </div>
-          <small className='website-rights'>CalWin © 2020</small>
+          <small className='website-rights'>EvenTo © 2023</small>
           <div className='social-icons'>
             <Link
               className='social-icon-link'
@@ -55,7 +55,7 @@ function Footer() {
             <Link
               className='social-icon-link'
               to={
-                '//www.youtube.com/channel/UCsKsymTY_4BYR-wytLjex7A?view_as=subscriber'
+                'https://www.youtube.com/@freecodecamp'
               }
               target='_blank'
               aria-label='Youtube'
