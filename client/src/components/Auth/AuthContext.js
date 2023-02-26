@@ -79,6 +79,7 @@ export function AuthProvider({children}){
             {!loading && children}
         </AuthContext.Provider>
     );
+    
 }
 
 export default AuthContext;
