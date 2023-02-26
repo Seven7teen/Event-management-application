@@ -63,7 +63,7 @@ function Navbar() {
           <div className='navbar-container container1'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
               <MdFingerprint className='navbar-icon' />
-              CalWin
+              EvenTo
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}

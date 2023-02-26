@@ -2,14 +2,14 @@ export const homeObjOne = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: 'CalWin: Calendar For a Win',
-  headline: 'Managing Events and Meetings has never been so easy!',
+  topLine: 'EvenTo : Towards the event',
+  headline: 'Manage Events and Meetings at your finger tips!',
   description:
     'Get access to our exclusive Event Managing App without getting charged any fees',
   buttonLabel: 'Get Started',
   imgStart: '',
   img: 'images/home1.svg',
-  alt: 'Calwin'
+  alt: 'EvenTo'
 };
 
 // export const homeObjTwo = {
