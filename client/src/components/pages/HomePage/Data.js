@@ -3,7 +3,7 @@ export const homeObjOne = {
   lightText: true,
   lightTextDesc: true,
   topLine: 'EvenTo : Towards the event',
-  headline: 'Manage Events and Meetings at your finger tips!',
+  headline: '',
   description:
     'Get access to our exclusive Event Managing App without getting charged any fees',
   buttonLabel: 'Get Started',
@@ -44,7 +44,7 @@ export const homeObjFour = {
   lightBg: true,
   lightText: false,
   lightTextDesc: false,
-  topLine: 'Easy Mangement',
+  topLine: 'Easy Management',
   headline: 'Get a Reminder for every important meeting you don\'t wanna miss out',
   description:
     'Never ever have to worry again about forgetting important dates. We store your data, so you can get a reminder everytime.',
