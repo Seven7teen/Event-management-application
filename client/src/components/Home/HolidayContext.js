@@ -1,5 +1,8 @@
 import React, { createContext,useEffect, useState } from 'react';
+
 import axios from 'axios';
+
+const REACT_APP_API_URL='6bc51d30c315569772b87aacdada48f733ebd5c6';
 
 export const HolidaysContext = createContext();
 
@@ -18,7 +21,7 @@ export default function HolidayContext(props) {
         navigator.geolocation.getCurrentPosition(function(loc){
             console.log(loc);
         })
-        axios.get(`https://calendarific.com/api/v2/holidays?&api_key=54ecef6b8ec5f05fe471b4b8029d0c539cf8b67c&country=${location}&year=${props.val.clone().format('YYYY')}`)
+        axios.get(`https://calendarific.com/api/v2/holidays?&api_key=${REACT_APP_API_URL}&country=${location}&year=${props.val.clone().format('YYYY')}`)
         .then(res => res.data)
         .then(data =>{
             let val = data.response.holidays;

@@ -13,6 +13,7 @@ import { useAuth } from '../Auth/AuthContext';
 // import nextId from "react-id-generator";
 // import uniqid from "uniqid";
 import EmailTags from './EmailTags';
+import AgendaTags from './AgendaTags';
 
 const db = firebase.firestore();
 
@@ -37,6 +38,7 @@ function AddEvent(props) {
     // const [people,setPeople] = useState([]);
     const [pid,setPid] = useState([]);
     const {currentUser} = useAuth();
+    const [agenda,setAgenda] = useState([]);
 
     const handleClose = () => {
         props.setOpen(false);
@@ -61,6 +63,8 @@ function AddEvent(props) {
                 eventDay : firebase.firestore.Timestamp.fromDate(selectedDate),
                 startTime: firebase.firestore.Timestamp.fromDate(startTime),
                 endTime: firebase.firestore.Timestamp.fromDate(endTime),
+                agenda: agenda
+                // agenda: agenda.toString().replaceAll("\\n","\n")
                 // admin: currentUser.uid
                 // sharedWith: people
             }
@@ -141,6 +145,7 @@ function AddEvent(props) {
         setEndTime(new Date());
         // setPeople([]);
         setPid([]);
+        setAgenda([]);
     }
 
     const descriptionElementRef = React.useRef(null);
@@ -157,10 +162,13 @@ function AddEvent(props) {
         // console.log(e.target.id);
         var id = e.target.id;
         var val = e.target.value;
+        // console.log(val);
         if(id==='standard-basic title')
             setTitle(val);
-        if(id==='standard-basic description')
+        if(id==='standard-basic description') {
             setDesc(val);
+        }
+            
     }
 
     return (
@@ -178,19 +186,20 @@ function AddEvent(props) {
                     <TextField required id="standard-basic title" placeholder="Title" value={title} onChange={(e) => handleChange(e)}/>
                     <TextField
                         id="standard-basic description"
-                        placeholder="Description(max 64 char)"
+                        placeholder="Description(max 1000 char)"
                         multiline
                         // rows={4}
                         // variant="outlined"
                         value={desc}
                         onChange={(e) => handleChange(e) }
-                        inputProps={{maxLength: 64}}
+                        inputProps={{maxLength: 1000}}
                         fullWidth
                         // style={{margin: "2% 0"}}
                     />
                     <DatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStartTime={setStartTime} setEndTime={setEndTime}/>
                     <TimePicker startTime={startTime} setStartTime={setStartTime} endTime={endTime} setEndTime={setEndTime} />
                     <EmailTags pid={pid} setPid={setPid} />
+                    <AgendaTags agenda={agenda} setAgenda={setAgenda}/>
                 </form>
             </DialogContent>
             <DialogActions>

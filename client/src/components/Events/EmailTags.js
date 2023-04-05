@@ -56,19 +56,21 @@ function EmailTags(props) {
         console.log(arr);
     }
 
-    const handlePaste = e => {
+    const handlePaste =async e => { /* Adding one email by copying from clipboard */
         e.preventDefault();
 
         var paste = e.clipboardData.getData("text");
+        console.log(paste);
+        
         var emails = paste.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g);
 
         if (emails) {
             var toBeAdded = emails.filter(email => !isInList(email));
-
-            props.setPeople((prev) => ([
-                ...prev,
-                ...toBeAdded
-            ]))
+            await setId(paste);
+            // props.setPid((prev) => ([
+            //     ...prev,
+            //     ...toBeAdded
+            // ]))
         }
     };
 

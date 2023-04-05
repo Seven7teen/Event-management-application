@@ -22,7 +22,7 @@ export default function Login() {
       <Navbar/>
       <div className="login-container">
           <div className="image-container">
-                <img className="login-image" src="images/login.png" alt="login"></img>
+                <img className="login-image" src="images/login-page.avif" alt="login" style={{margin: "30px", width: "80%"}}></img>
           </div>
           <div className="login-screen">
             <h1 style={{color:"#ffffff", marginBottom:"20%"}}>Login</h1>

@@ -27,7 +27,7 @@ function Events() {
     const [eventId,setEventId] = useState("");
     const [edit,setEdit] = useState(false);
     // console.log(holidays);
-    
+
     const [expand,setExpand] = useState([]);
 
     useEffect(() => {
@@ -68,7 +68,7 @@ function Events() {
 
     function handleDelete(event) {
 
-        // console.log(event.id);   
+        // console.log(event.id);
 
         db.collection("users").doc(currentUser.uid).update({
             events: events.filter(eve => eve.id!==event.id)
@@ -97,7 +97,7 @@ function Events() {
         if(currentUser){
             db.collection("users").doc(currentUser.uid).onSnapshot((doc) => {
                 if(doc.exists){
-                    // console.log(doc.data());
+                    console.log(doc.data());
                     setEvents(doc.data().events);
                     // if(doc.data().newEv){
                     //     doc.data().newEv[0].get().then(res => {
@@ -155,13 +155,13 @@ function Events() {
                 <div className="main-block">
                 <div style={{display: "block", paddingLeft:"2%", paddingRight:"2%"}}>
                     <div id="public" className="public selectedList" onClick={showPublic} style={{fontSize:"20px",padding:"3px",display:"inline-block",width:"50%",textAlign:"center"}}>
-                        Public Holidays
+                        Holidays
                     </div>
                     <div id="own" className="own" onClick={showOwn} style={{fontSize:"20px",padding:"3px",display:"inline-block",width:"50%",textAlign:"center"}}>
                         Your Events
                         </div>
                 </div>
-                {publicEve ? 
+                {publicEve ?
                     (<div className="event-list" style={{paddingLeft:"2%", paddingRight:"2%"}}>
                     {holidays.map((holiday,index) => (
                         <div className="card">
@@ -206,7 +206,7 @@ function Events() {
                                     <div style={{fontWeight:"700",fontSize:"1.1rem"}}>
                                         {event.eventDay.toDate().getDate()}
                                     </div>
-                                    <div style={{paddingTop:"3px"}}>    
+                                    <div style={{paddingTop:"3px"}}>
                                         {event.eventDay.toDate().toLocaleString('default',{month: 'short'})}
                                     </div>
                                     <div style={{paddingTop:"3px"}}>
@@ -221,15 +221,58 @@ function Events() {
                                             {/* <div style={{display:"inline-block"}}>{`${event.startTime.toDate().toLocaleTimeString().split(" ")[0].substr(0,5)} - ${event.endTime.toDate().toLocaleTimeString().split(" ")[0].substr(0,5)} `}</div> */}
                                             <div>{`${formatAMPM(event.startTime.toDate())} - ${formatAMPM(event.endTime.toDate())}`}</div>
                                         </div>
+                                        {/* <div style={{height:"10px",width:"10px",borderRadius:"100%",backgroundColor:"rgb(3, 155, 229)",margin:"5px 5px 0 0",display:"inline-block"}}>
+                                            </div> */}
                                         <div>
-                                            {event.title}
+                                            {/* <span>Title - </span> */}
+                                             {event.title}
                                         </div>
                                     </div>
                                     { expand[index] ? (
                                         <div>
                                             <div style={{padding:"20px",paddingLeft:"0"}}>
-                                                <div>{event.description==="" ? "No Description Provided" : event.description}</div>
+                                                {event.description==="" ? <span></span> : <span>Description - </span>}
+                                                {event.description==="" ? "No Description Provided" : event.description}
                                             </div>
+                                            <br />
+
+                                            <table className='desc'>
+                                                <thead>
+                                                    {(event.agenda.length !== 0) ? (
+                                                        <tr>
+                                                        <th>S.No.</th>
+                                                        <th>Agenda title</th>
+                                                        <th>Agenda description</th>
+                                                        <th>Agenda duration</th>
+                                                        <th></th>
+                                                        </tr>
+                                                    ) : <tr></tr>}
+                                                </thead>
+                                                <tbody>
+                                                {(event.agenda.length !== 0) ? (event.agenda.map((meetingInfo,index) => (
+                                                    <tr>
+                                                    <td>{index+1}</td>
+                                                    <td>{meetingInfo.title}</td>
+                                                    <td>{meetingInfo.description.replaceAll("\\n", "\n")}</td>
+                                                    <td>{meetingInfo.duration}</td>
+                                                    {/* <td><button className="button">Edit</button></td> */}
+                                                    </tr>
+                                                ))) : <tr></tr>}
+                                                </tbody>
+                                            </table>
+
+                                            {/* <div>
+                                            {(event.agenda.length !== 0) ? (event.agenda.map((meetingInfo,index) => (
+                                                <div style={{display: 'flex'}}>
+                                                <div style={{marginRight: '10%'}}>{meetingInfo.title}</div>
+                                                
+                                                <div style={{marginRight: '10%'}}>{meetingInfo.description}</div>
+                                                
+                                                <div>{meetingInfo.duration}</div>
+                                                <br />
+                                                </div>
+                                            ))) : "no agenda"}
+                                            </div> */}
                                         </div>
                                         ): ""
                                     }
@@ -240,7 +283,7 @@ function Events() {
                                     </div>
                                 </div>
                             </div>
-                        ))) : 
+                        ))) :
                         <div style={{backgroundColor:"white"}}>
                             <h1 style={{textAlign:"center", paddingTop:"20%"}}>No Events to show</h1>
                         </div>

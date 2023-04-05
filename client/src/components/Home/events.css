@@ -28,7 +28,7 @@
 
 .content:hover {
     /* background-color: red; */
-        background-color: #c3d1e8;
+        /* background-color: #c3d1e8; */
 }
 .content{
     padding: 2px;
@@ -38,6 +38,8 @@
     font-weight: 600;
     width: 100%;
     flex-direction: column;
+    /* white-space: pre-line;
+    line-break:anywhere; */
 }
 
 .main-details{
@@ -72,3 +74,41 @@
         flex-direction: column !important;
     }
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #333;
+    color: #fff;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  /* Define a class for a button */
+  .button {
+    background-color: #4CAF50;
+    border: none;
+    color: #fff;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .desc {
+    white-space: pre-line;
+    line-break:anywhere;
+  }

@@ -44,7 +44,7 @@ function Calendar(props) {
     const [homeDisplay,setHomeDisplay] = useState([]);
     const [calendar,setCalendar] = useState([]);
     const [viewType, setviewType] = useState("month");
-    const {holidays} = useContext(HolidaysContext); 
+    const {holidays} = useContext(HolidaysContext);
     const [events,setEvents] = useState([]);
     const {currentUser} = useAuth();
     const [eventId,setEventId] = useState("");
@@ -56,24 +56,25 @@ function Calendar(props) {
     useEffect(() => {
         setCalendar(buildCalendar(props.val,viewType));
     },[props.val,viewType,holidays]);
-    
+
     useEffect(() => {
         db.collection("users").doc(currentUser.uid).onSnapshot((doc) => {
             if(doc.exists){
-                // let ev = [];
-                // console.log(doc.data().events.length);
-                // if(doc.data().events){
-                //     doc.data().events.forEach((el) => {
-                //         el.get().then(res => {
-                //             // console.log(res.data());
-                //             ev.push(res.data());
-                //         })
-                //     })
-                //     setEvents(ev);
-                // }
-                // console.log(ev);
-                
-                // console.log(doc.data());
+              // console.log("found");
+              //   let ev = [];
+              //   console.log(doc.data().events.length);
+              //   if(doc.data().events){
+              //       doc.data().events.forEach((el) => {
+              //           el.get().then(res => {
+              //               // console.log(res.data());
+              //               ev.push(res.data());
+              //           })
+              //       })
+              //       setEvents(ev);
+              //   }
+              //   console.log(ev);
+              //
+              //   console.log(doc.data());
                 setEvents(doc.data().events);
             }
         });
@@ -216,7 +217,7 @@ function Calendar(props) {
         {
             props.setVal(props.val.clone().add(1,"week"));
         }
-        
+
     }
 
     function handlePrev(){
@@ -247,7 +248,7 @@ function Calendar(props) {
         return "event-card orange-card";
     }
 
-    
+
     var weeklyTime = Array(24).fill(null).map(() => Array(8));
     var timeStyle = Array(24).fill(null).map(() => Array(8));
 
@@ -260,8 +261,8 @@ function Calendar(props) {
 
         for(var i=0;i<24;i++)
     {
-        
-        
+
+
         for(var j=0;j<8;j++)
         {
             weeklyTime[i][j] = "";
@@ -296,7 +297,7 @@ function Calendar(props) {
                 // const m = ev.startTime.toDate().getMinutes();
                 // console.log(e);
                 if(st == dt){
-                    
+
                     const lolu =Math.round((h + e)/2);
                     // console.log(lolu);
                     if(weeklyTime[lolu][k]==="")
@@ -314,7 +315,7 @@ function Calendar(props) {
             })
         }
     }
-    
+
     const timeStyles = (ind1,ind2) => {
         let s = "timeStampMain timeStamp";
         if(weeklyTime[ind1][ind2] !== ""){
@@ -335,7 +336,7 @@ function Calendar(props) {
         <div className="main-container" style={{display:"flex"}}>
         <div className="calendar">
         <div className="header">
-        
+
             <div style={{paddingTop:"15px"}}>
                 <div className="navigation" onClick={() => handlePrev()}>
                     <NavigateBeforeIcon />
@@ -348,11 +349,11 @@ function Calendar(props) {
                 {curMonth()} {curYear()}
             </div>
             <div>
-                {/* <ControlledOpenSelect 
+                {/* <ControlledOpenSelect
                     viewType = {viewType}
                     setviewType = {setviewType}
                 /> */}
-                <NativeSelect
+                {/* <NativeSelect
                     value={viewType}
                     onChange={(e) => setviewType(e.target.value)}
                     name="View"
@@ -361,7 +362,7 @@ function Calendar(props) {
                     >
                     <option value="month">Month</option>
                     <option value="week">Week</option>
-                </NativeSelect>
+            </NativeSelect> */}   
             </div>
         </div>
         {viewType==="week" ?
@@ -385,7 +386,7 @@ function Calendar(props) {
                     {week.map((day) => (
                         <div className="day" onClick={() => props.setVal(day)}>
                             <div className={dayStyles(day)}>{day.format("D")}</div>
-                            <div className="dot-container">  
+                            <div className="dot-container">
                                     {holidays.map((holiday) => {
                                         const dayH = holiday.date.datetime.day;
                                         const monthH = holiday.date.datetime.month;
@@ -407,7 +408,7 @@ function Calendar(props) {
                     {weeklyTime.map((timeRow,ind) => (
                         <div style={{display:"flex"}}>
                             {timeRow.map((timeEvent,index) => (
-                                index !== 0 ? 
+                                index !== 0 ?
                                     <div className={timeStyles(ind,index)} style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
                                 {timeEvent}
                             </div>
@@ -417,7 +418,7 @@ function Calendar(props) {
                                     {timeEvent}
                                     </div>
                                 </div>
-                                
+
                             ))}
                         </div>
                     ))}
@@ -429,7 +430,7 @@ function Calendar(props) {
         </div>
         </div>
     </div>)
-    : 
+    :
         (<div className="body" style={{borderRadius: "10px"}}>
             <div className="day-names">
                 {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map((d) => {
@@ -447,9 +448,9 @@ function Calendar(props) {
                                 <span style={{height:"10px", width:"10px"}}>
                                     {day.format("D")}
                                 </span>
-                                
+
                             </div>
-                            <div className="dot-container">  
+                            <div className="dot-container">
                                     {holidays.map((holiday) => {
                                         const dayH = holiday.date.datetime.day;
                                         const monthH = holiday.date.datetime.month;
@@ -480,7 +481,7 @@ function Calendar(props) {
             const curmonth = curMonth();
             if(month === curmonth)
             {
-                numEvents===0 && setNumEvents(1)  
+                numEvents===0 && setNumEvents(1)
                 return (
                     <div className={cardStyle(index)}>
                         <div style={{display:"flex"}}>
@@ -523,7 +524,7 @@ function Calendar(props) {
     <Fab color="primary" aria-label="add" onClick={() => handleAddEvent('paper')}>
         <AddIcon />
     </Fab>
-    
+
     </div>
     </div>
     </div>
