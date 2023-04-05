@@ -11,6 +11,7 @@ import TimePicker from "./TimePicker";
 import firebase from '../../firbase';
 import { useAuth } from '../Auth/AuthContext';
 import EmailTags from './EmailTags';
+import AgendaTags from './AgendaTags';
 
 const db = firebase.firestore();
 
@@ -33,6 +34,7 @@ function EditEvent(props) {
     const [startTime,setStartTime] = useState(new Date());
     const [endTime,setEndTime] = useState(new Date());  
     const [pid,setPid] = useState([]);
+    const [agenda,setAgenda] = useState([]);
     const {currentUser} = useAuth();
 
     const handleClose = () => {
@@ -48,7 +50,8 @@ function EditEvent(props) {
             description: desc,
             eventDay : firebase.firestore.Timestamp.fromDate(selectedDate),
             startTime: firebase.firestore.Timestamp.fromDate(startTime),
-            endTime: firebase.firestore.Timestamp.fromDate(endTime)
+            endTime: firebase.firestore.Timestamp.fromDate(endTime),
+            agenda: agenda
         }
 
         const newEvents = [...props.events];
@@ -150,6 +153,7 @@ function EditEvent(props) {
         setStartTime(new Date());
         setEndTime(new Date());
         setPid([]);
+        setAgenda([]);
     }
 
     const descriptionElementRef = React.useRef(null);
@@ -195,6 +199,7 @@ function EditEvent(props) {
                 if(doc.exists){
                     const el = doc.data();
                     setPid(el.sharedWith);
+                    setAgenda(el.agenda);
                 }
             })
         }
@@ -229,6 +234,7 @@ function EditEvent(props) {
                     <DatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStartTime={setStartTime} setEndTime={setEndTime}/>
                     <TimePicker startTime={startTime} setStartTime={setStartTime} endTime={endTime} setEndTime={setEndTime} />
                     <EmailTags pid={pid} setPid={setPid} />
+                    <AgendaTags agenda={agenda} setAgenda={setAgenda} />
                 </form>
             </DialogContent>
             <DialogActions>

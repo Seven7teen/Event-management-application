@@ -9,7 +9,7 @@ export default function HomePage(props) {
     const {currentUser} = useAuth();
     return (
         <>
-            {currentUser ? 
+            {currentUser ?
             <div style={{display:"flex"}}>
                 <Sidebar
                     visible={true}
@@ -21,11 +21,11 @@ export default function HomePage(props) {
                     <Calendar
                         val={props.val}
                         setVal={props.setVal}
-                        // show={true}
+                        show={true}
                     />
                     {/* <Events/> */}
                 </div>
-            </div> : 
+            </div> :
             <Redirect to="/login"/>
             }
         </>

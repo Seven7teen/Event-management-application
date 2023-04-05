@@ -30,20 +30,20 @@
     background-color: #d4d5d6;
     /* display: inline-block !important;  */
     font-size: 14px;
-    border-radius: 30px;
-    height: 30px;
-    padding: 0 4px 0 1rem;
-    display: inline-flex ;
+    border-radius: 5px;
+    /* height: 30px; */
+    padding: 10px 10px 0 1rem;
+    display: inline-block ;
     width: auto !important;
     align-items: center;
-    margin: 0 0.3rem 0.3rem 0;
+    margin: 1rem 0.3rem 0.3rem 0;
 }
 
 .tag-item>.button {
     background-color: white;
     width: 22px;
     height: 22px;
-    border-radius: 50%;
+    border-radius: 5px;
     border: none;
     cursor: pointer;
     font: inherit;
@@ -55,3 +55,39 @@
     align-items: center;
     justify-content: center;
 }
+
+/* .card{
+    padding: 1%;
+    border: #dadce0 1px solid;
+    display: flex;
+} */
+
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.description {
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif !important;
+    color: #343232;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+}
+
+.butt {
+    background-color: #4CAF50;
+    width: fit-content;
+    border: none;
+    color: #fff;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }

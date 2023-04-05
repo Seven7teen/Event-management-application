@@ -3,6 +3,11 @@
     /* overflow: hidden; */
     display: flex;
     /* padding-bottom: 2%; */
+
+    /*  to view description splitted in multi lines*/
+    /* white-space: pre-line;
+    line-break:anywhere; */
+    
 }
 
 @media(max-width: 1000px){
@@ -105,7 +110,7 @@
     width: 70%;
     padding-left: 2%;
     padding-right: 2%;
-    
+
 }
 .calendar .header {
     /* background-color: light-blue;s */
@@ -151,7 +156,7 @@
 }
 
 /* .calendar .header .previous {
-    
+
 }
 .calendar .header .next {
     flex: 1;
@@ -250,8 +255,8 @@
 }
 
 .calendar .day div.selected {
-    
-    background-color: #4a4ec6;
+
+    background-color: #A406B5;
     color: White;
     border-radius: 5px;
     font-weight: bold;
