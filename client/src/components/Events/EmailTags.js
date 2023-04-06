@@ -178,6 +178,9 @@ function EmailTags(props) {
           </div>
         ))}
 
+        {/* <input type="file" accept=".xlsx" onChange={handleFileSelect} />
+        <button onClick={registerUsers}>Register Users</button> */}
+
         <input
           className={"input " + (error && " has-error")}
           value={value}
