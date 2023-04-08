@@ -26,7 +26,7 @@ function Events() {
     const [events,setEvents] = useState([]);
     const [eventId,setEventId] = useState("");
     const [edit,setEdit] = useState(false);
-    // console.log(holidays);
+    // console.log(events);
 
     const [expand,setExpand] = useState([]);
 
@@ -236,30 +236,65 @@ function Events() {
                                             </div>
                                             <br />
 
-                                            <table className='desc'>
-                                                <thead>
-                                                    {(event.agenda.length !== 0) ? (
+                                            {
+                                                (event.hasOwnProperty('agenda') ? (
+                                                    <table className='desc'>
+                                                    <thead>
+                                                        {(event.agenda.length !== 0) ? (
+                                                            <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Agenda title</th>
+                                                            <th>Agenda description</th>
+                                                            <th>Agenda duration</th>
+                                                            <th></th>
+                                                            </tr>
+                                                        ) : <tr></tr>}
+                                                    </thead>
+                                                    <tbody>
+                                                    {(event.agenda.length !== 0) ? (event.agenda.map((meetingInfo,index) => (
                                                         <tr>
-                                                        <th>S.No.</th>
-                                                        <th>Agenda title</th>
-                                                        <th>Agenda description</th>
-                                                        <th>Agenda duration</th>
-                                                        <th></th>
+                                                        <td>{index+1}</td>
+                                                        <td>{meetingInfo.title}</td>
+                                                        <td>{meetingInfo.description.replaceAll("\\n", "\n")}</td>
+                                                        <td>{meetingInfo.duration}</td>
+                                                        {/* <td><button className="button">Edit</button></td> */}
                                                         </tr>
-                                                    ) : <tr></tr>}
-                                                </thead>
-                                                <tbody>
-                                                {(event.agenda.length !== 0) ? (event.agenda.map((meetingInfo,index) => (
-                                                    <tr>
-                                                    <td>{index+1}</td>
-                                                    <td>{meetingInfo.title}</td>
-                                                    <td>{meetingInfo.description.replaceAll("\\n", "\n")}</td>
-                                                    <td>{meetingInfo.duration}</td>
-                                                    {/* <td><button className="button">Edit</button></td> */}
-                                                    </tr>
-                                                ))) : <tr></tr>}
-                                                </tbody>
-                                            </table>
+                                                    ))) : <tr></tr>}
+                                                    </tbody>
+                                                </table>
+                                                ) : (
+                                                    <h2>No agenda defined</h2>
+                                                ))
+                                            }
+
+                                            <br />
+
+                                            {event.hasOwnProperty('sharedWith') ? (
+                                                <table>
+                                                    <thead>
+                                                        {(event.sharedWith.length !== 0) ? (
+                                                            <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Attedees</th>
+                                                            <th></th>
+                                                            </tr>
+                                                        ) : <tr></tr>}
+                                                    </thead>
+                                                    <tbody>
+                                                    {(event.sharedWith.length !== 0) ? (event.sharedWith.map((invitedAttendee,index) => (
+                                                        <tr>
+                                                        <td>{index+1}</td>
+                                                        <td>{invitedAttendee.email}</td>
+                                                        {/* <td><button className="button">Edit</button></td> */}
+                                                        </tr>
+                                                    ))) : <tr></tr>}
+                                                    </tbody>
+                                                </table>
+                                            ) : (
+                                                <h2>No invitations sent</h2>
+                                            )}
+
+                                            
 
                                             {/* <div>
                                             {(event.agenda.length !== 0) ? (event.agenda.map((meetingInfo,index) => (
