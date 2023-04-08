@@ -39,6 +39,7 @@ function AddEvent(props) {
     const [pid,setPid] = useState([]);
     const {currentUser} = useAuth();
     const [agenda,setAgenda] = useState([]);
+    // const [users, setUsers] = useState([]);
 
     const handleClose = () => {
         props.setOpen(false);
@@ -63,7 +64,8 @@ function AddEvent(props) {
                 eventDay : firebase.firestore.Timestamp.fromDate(selectedDate),
                 startTime: firebase.firestore.Timestamp.fromDate(startTime),
                 endTime: firebase.firestore.Timestamp.fromDate(endTime),
-                agenda: agenda
+                agenda: agenda,
+                sharedWith: pid
                 // agenda: agenda.toString().replaceAll("\\n","\n")
                 // admin: currentUser.uid
                 // sharedWith: people

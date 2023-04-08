@@ -47,14 +47,15 @@ function AgendaTags(props) {
     }
 
     // const handleKeyDown = async e => {
-    //     if(["Enter","Tab", ","].includes(e.key)) {
-    //         var val = value.trim();
-    //             await setId(value);
-    //             setValue("");
-    //     }
+        // if(["Enter","Tab", ","].includes(e.key)) {
+        //     var val = value.trim();
+        //         await setId(value);
+        //         setValue("");
+        // }
     // }
 
     const setId = async (meetingInfo) => {
+      if(!(meetingInfo.title === "" && meetingInfo.description === "" && meetingInfo.duration === "")) {
         var arr = [...props.agenda];
         arr.push({
             title: meetingInfo.title,
@@ -63,6 +64,7 @@ function AgendaTags(props) {
         });
         props.setAgenda(arr);
         console.log(arr);
+      } 
     }
 
     // const handlePaste =async e => { /* Adding one email by copying from clipboard */
@@ -122,6 +124,7 @@ function AgendaTags(props) {
             placeholder="Type title of agenda"
             value={meetingInfo.title}
             onChange={handleTitleChange}
+            // onKeyDown={handleKeyDown}
         />
         <br />
         <label>Description:</label>
@@ -130,6 +133,7 @@ function AgendaTags(props) {
             placeholder="Type description of agenda"
             value={meetingInfo.description}
             onChange={handleDescriptionChange}
+            // onKeyDown={handleKeyDown}
         ></textarea>
         <br />
         <label>Duration:</label>
@@ -139,6 +143,7 @@ function AgendaTags(props) {
             placeholder="Type duration of agenda"
             value={meetingInfo.duration}
             onChange={handleDurationChange}
+            // onKeyDown={handleKeyDown}
         />
         <button className='butt' onClick={handleAddingAgenda}>
                 Add Agenda

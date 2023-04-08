@@ -7,6 +7,7 @@ import ListItem from "@material-ui/core/ListItem";
 import IconButton from '@material-ui/core/IconButton';
 import { MdFingerprint } from 'react-icons/md';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import "./sidebar.css";
 import TodayIcon from '@material-ui/icons/Today';
 import EventNoteIcon from '@material-ui/icons/EventNote';
@@ -111,9 +112,24 @@ export default function Sidebar(props) {
             <AddCircleIcon style={{color:"#ffffff"}}/>
           </ListItem>
           </Tooltip>
+          {/* <Tooltip key="AddAttendeesRegistration" title="Register" placement="right">
+          <ListItem button className="list-item" onClick={() => history.push("/registerAttendees")}>
+            <CloudUploadIcon style={{color:"#ffffff"}}/>
+          </ListItem>
+          </Tooltip> */}
         </List>
       </Drawer>
       <AddEvent open={open} setOpen={setOpen} scroll={scroll} setScroll={setScroll}/>
     </div>
   );
 }
+
+// db.collection('users').doc(user.uid).set(({
+  //                 name: user.displayName,
+  //                 photoURL: user.photoURL,
+  //                 email: user.email
+  //             }),{merge:true}).then(() => {
+  //                 console.log("Document written successfully");
+  //             }).catch(err => {
+  //                 console.error("Error: "+err);
+  //             })

@@ -191,7 +191,7 @@ window.env = {
   "npm_package_dependencies_xlsx": "^0.18.5",
   "npm_package_dependencies__date_io_date_fns": "^1.3.13",
   "npm_package_dependencies__material_ui_core": "^4.11.3",
-  "npm_package_dependencies__material_ui_icons": "^4.11.2",
+  "npm_package_dependencies__material_ui_icons": "^4.11.3",
   "npm_package_dependencies__material_ui_pickers": "^3.3.10",
   "npm_package_dependencies__testing_library_jest_dom": "^5.11.9",
   "npm_package_dependencies__testing_library_react": "^11.2.5",
