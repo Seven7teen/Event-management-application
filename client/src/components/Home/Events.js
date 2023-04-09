@@ -291,7 +291,7 @@ function Events() {
                                                     </tbody>
                                                 </table>
                                             ) : (
-                                                <h2>No invitations sent</h2>
+                                                <h2></h2>
                                             )}
 
                                             

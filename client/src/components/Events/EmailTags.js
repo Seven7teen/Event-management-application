@@ -168,7 +168,8 @@ function EmailTags(props) {
         console.log(darr);
     }
 
-    const registerUsers = () => {
+    const registerUsers = (e) => {
+        // e.preventDefault();
         users.forEach( async (user) => {
             await createUser(user.email);
         });
