@@ -1,0 +1,271 @@
+* {
+  padding: 0;
+  margin: 0  ;
+  box-sizing: border-box  ;
+}
+html {
+  font-family: "Montserrat", sans-serif  ;
+}
+body {
+  background: #eceff4  ;
+  /* padding: 0 16px; */
+}
+
+.navigation {
+  background-color: #0096bb  ;
+}
+
+.sidebar {
+  display: flex  ;
+  min-height: 100vh  ; 
+  /* width: 200px; */
+  /* overflow-y: scroll; */
+}
+
+.sidebar ul {
+  list-style: none  ;
+  margin: 0  ;
+  padding: 0  ;
+  /* width: 200px; */
+  background-color: #f8f8f6  ;
+}
+
+.sidebar li {
+  padding: 10px  ;
+  width: 200px  ;
+  cursor: pointer  ;
+}
+
+.sidebar li:hover {
+  background-color: #ddd  ;
+}
+
+.sidebar li.active {
+  background-color: #e2ebf2  ;
+}
+
+.main-content {
+  flex: 1  ;
+  padding: 20px  ;
+  background-color: #eceff4  ;
+  /* overflow-y:auto; */
+}
+
+.session-tab {
+  display: flex  ;
+  flex-direction: column  ;
+  /* margin-left: 200px; */
+  /* width: 100%;
+  height: 100%; */
+}
+
+.session-header {
+  display: flex  ;
+  justify-content: space-between  ;
+  align-items: center  ;
+  padding: 1rem  ;
+  background-color: #f8f8f8  ;
+}
+
+.agendaTabs {
+  padding: 10px  ;
+  width: 50%  ;
+  cursor: pointer  ;
+  text-align: center  ;
+}
+
+.agendaTabs.active {
+  background-color: #ccc  ;
+}
+
+.session-header h2 {
+  margin: 0 ;
+}
+
+.session-header button {
+  font-size: 1rem  ;
+  padding: 0.5rem  ;
+  border-radius: 5px  ;
+  border: none  ;
+  background-color: #4caf50  ;
+  color: #fff  ;
+  cursor: pointer  ;
+  transition: all 0.2s ease-in-out  ;
+}
+
+.session-header button:hover {
+  background-color: #388e3c  ;
+}
+
+.session-body {
+  display: flex  ;
+  flex-direction: column  ;
+  /* overflow-x: scroll; */
+  /* scroll-behavior: smooth; */
+}
+
+.session-day {
+  display: flex;
+  flex-direction: row  ;
+  margin: 1rem  ;
+  width: auto  ;
+  height: 100%  ;
+  background-color: #fff  ;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2)  ;
+}
+
+.session-buttons button {
+  margin-right: 2rem  ;
+}
+
+.session-day .imgH3 {
+  margin: 0  ;
+  padding: 1rem  ;
+  background-color: #f8f8f8  ;
+  font-size: 1.2rem  ;
+  font-weight: bold  ;
+}
+
+.imgH3 h3 {
+  margin: 0  ;
+  padding: 1rem  ;
+  background-color: #f8f8f8  ;
+  font-size: 1.2rem  ;
+  font-weight: bold  ;
+}
+
+.imgH3 p {
+  margin: 0  ;
+  padding: 1rem  ;
+  color: #423e3e  ;
+  font-size: 1rem  ;
+  font-weight: bold  ;
+  text-align: center  ;
+}
+
+.imgH3 {
+  text-align: center  ;
+}
+
+.imgH3 img {
+  width: 100px  ;
+  height: 100px  ;
+  border-radius: 100%  ;
+  /* text-align: center; */
+}
+
+.session-events {
+  display: flex  ;
+  flex-direction: column  ;
+  padding: 1rem  ;
+}
+
+.session-event {
+  margin-bottom: 1rem  ;
+  border-bottom: 1px solid #ccc  ;
+  padding-bottom: 1rem  ;
+}
+
+.session-event h4 {
+  margin: 0  ;
+  font-size: 1rem  ;
+}
+
+.session-event p {
+  margin: 0  ;
+  font-size: 0.9rem  ;
+  color: #666  ;
+}
+
+.attendee-tab {
+  display: flex  ;
+  flex-direction: column  ;
+  /* margin-left: 200px; */
+  /* width: 100%;
+  height: 100%; */
+}
+
+.attendee-body {
+  display: flex  ;
+  flex-direction: row  ;
+  flex-wrap: wrap  ;
+  /* overflow-x: scroll; */
+  /* scroll-behavior: smooth; */
+}
+
+.attendee-day {
+  display: flex  ;
+  flex-direction: row  ;
+  margin: 1rem  ;
+  width: auto  ;
+  height: 100%  ;
+  background-color: #fff  ;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2)  ;
+}
+
+.attendee-buttons button {
+  margin-right: 2rem   ;
+}
+
+.attendee-day .imgH3 {
+  margin: 0  ;
+  padding: 1rem  ;
+  background-color: #f8f8f8  ;
+  font-size: 1.2rem  ;
+  font-weight: bold  ;
+}
+
+.attendee-events {
+  display: flex  ;
+  flex-direction: column  ;
+  padding: 1rem 0.5rem  ;
+}
+
+.attendee-event {
+  margin-bottom: 1rem  ;
+  border-bottom: 1px solid #ccc  ;
+  padding-bottom: 1rem  ;
+}
+
+.attendee-event h4 {
+  margin: 0  ;
+  font-size: 1rem  ;
+  color: #4c81b5  ;
+}
+
+.attendee-event p {
+  margin: 0  ;
+  font-size: 0.9rem  ;
+  color: #666  ;
+}
+
+
+.navigateGlobalEvent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  flex: 1
+}
+
+.eventRightNav {
+  display: flex;
+}
+
+.eventName {
+  margin-right: 2rem;
+}
+
+.inputTab {
+  width: 70%;
+  margin: auto;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+

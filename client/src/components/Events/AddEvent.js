@@ -14,6 +14,7 @@ import { useAuth } from '../Auth/AuthContext';
 // import uniqid from "uniqid";
 import EmailTags from './EmailTags';
 import AgendaTags from './AgendaTags';
+import GoogleCalendarEvent from './GoogleCalendarEvent';
 
 const db = firebase.firestore();
 
@@ -202,6 +203,7 @@ function AddEvent(props) {
                     <TimePicker startTime={startTime} setStartTime={setStartTime} endTime={endTime} setEndTime={setEndTime} />
                     <EmailTags pid={pid} setPid={setPid} />
                     <AgendaTags agenda={agenda} setAgenda={setAgenda}/>
+                    <GoogleCalendarEvent title={title} startTime={startTime} endTime={endTime} />
                 </form>
             </DialogContent>
             <DialogActions>

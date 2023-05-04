@@ -169,7 +169,7 @@ function EmailTags(props) {
     }
 
     const registerUsers = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         users.forEach( async (user) => {
             await createUser(user.email);
         });

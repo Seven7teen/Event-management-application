@@ -4,6 +4,7 @@ import Home from './pages/HomePage/Home';
 import Services from './pages/Services/Services';
 import Events from './Home/Events';
 import RegisterAttendees from './Home/RegisterAttendees';
+import GlobalEventService from './pages/HomePage/GlobalEventService'
 
 import {
   BrowserRouter as Router,
@@ -44,6 +45,7 @@ function App() {
           <Route path="/notifications" component={Notifications}  />
           <Route path="/search" component={SearchPage} />
           <Route path="/registerAttendees" component={RegisterAttendees} />
+          <Route path="/globalEventService/:globalEventId" component={GlobalEventService} />
         </Switch>
         </AuthProvider>
         </HolidayContext>
