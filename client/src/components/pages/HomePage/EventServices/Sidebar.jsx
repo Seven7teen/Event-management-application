@@ -87,7 +87,7 @@ const Sidebar = (props) => {
         {activeItem === 'Query' && (
           <div>
             {/* <ExcelSheetInput /> */}
-            <ChatBox />
+            {/* <ChatBox /> */}
           </div>
         )}
       </div>
