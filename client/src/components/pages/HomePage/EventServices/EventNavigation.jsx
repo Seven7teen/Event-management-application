@@ -32,14 +32,6 @@ const EventNavigation = (props) => {
         });
     },[]);
 
-    // useEffect(() => {
-    //     db.collection("users").doc(currentUser.uid).onSnapshot((doc) => {
-    //         if(doc.exists){
-                     
-    //         }
-    //     });
-    // },[])
-
 
 
     return (
@@ -51,6 +43,8 @@ const EventNavigation = (props) => {
             <span>{globalEvent.endDate}</span>
             </div>
             <div className="eventRightNav">
+                <div>{props.userType}</div>
+                
             <p>{currentUser.displayName}</p>
             <Link to='/' className='btn-link'>
                 <p>Home</p>

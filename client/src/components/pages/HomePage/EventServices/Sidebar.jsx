@@ -10,7 +10,7 @@ import './styles.css';
 
 
 const Sidebar = (props) => {
-  const [activeItem, setActiveItem] = useState('Contact');
+  const [activeItem, setActiveItem] = useState('Attendees');
   const [click, setClick] = useState(false);
   const [dataFromChild, setDataFromChild] = useState(0);
 
@@ -64,7 +64,8 @@ const Sidebar = (props) => {
         )} */}
         {
           activeItem === 'Agenda' && (
-            <Agenda globalEventId={props.globalEventId} />
+            (props.userType === 'Admin' && <Agenda globalEventId={props.globalEventId} />)
+            
           )
         }
         {
@@ -87,7 +88,7 @@ const Sidebar = (props) => {
         {activeItem === 'Query' && (
           <div>
             {/* <ExcelSheetInput /> */}
-            {/* <ChatBox /> */}
+            <ChatBox userType={props.userType}/>
           </div>
         )}
       </div>

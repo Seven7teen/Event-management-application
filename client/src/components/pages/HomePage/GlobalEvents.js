@@ -20,7 +20,8 @@ function GlobalEvents() {
                 setGlobalEventsData(tempDoc);
                 console.log(tempDoc);
             })
-    },[])
+    },[]);
+
 
   return (
     <>
