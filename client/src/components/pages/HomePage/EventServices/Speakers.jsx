@@ -68,7 +68,6 @@ const Speakers = (props) => {
                                     </div>
                                     <div className="speakers-buttons">
                                         <button type="button" className="btn btn-light btn-sm">Send Message</button>
-                                        <button type="button" className="btn btn-light btn-sm">View Profile</button>
                                     </div>
                                 </div>
                             </div>
