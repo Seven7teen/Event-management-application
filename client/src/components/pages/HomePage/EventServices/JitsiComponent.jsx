@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
-class JitsiComponent extends Component {
+const JitsiComponent = (props) => {
+    const domain = 'meet.jit.si';
+    // const item = props.activeSession;
+    let api = {};
 
-    domain = 'meet.jit.si';
-    api = {};
+    const [room,setRoom] = useState('random');
+    const [user, setUser] = useState({
+        name: 'taj'
+    });
+    const [isAudioMuted, setIsAudioMuted] = useState(false);
+    const [isVideoMuted, setIsVideoMuted] = useState(false);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            room: 'bwb-bfqi-vmg',
-            user: {
-                name: 'Akash Verma'
-            },
-            // childData: 0,
-            isAudioMuted: false,
-            isVideoMuted: false
+    useEffect(() => {
+        if (window.JitsiMeetExternalAPI) {
+            startMeet(props.roomName, props.userName);
+        } else {
+            alert('JitsiMeetExternalAPI not loaded');
         }
-    }
+    },[]);
 
-    startMeet = () => {
+    const startMeet = (room, name) => {
         const options = {
-            roomName: this.state.room,
+            roomName: room,
             width: '100%',
             height: 500,
             configOverwrite: { prejoinPageEnabled: false },
@@ -29,113 +31,126 @@ class JitsiComponent extends Component {
             },
             parentNode: document.querySelector('#jitsi-iframe'),
             userInfo: {
-                displayName: this.state.user.name
+                displayName: name
             }
         }
-        this.api = new window.JitsiMeetExternalAPI(this.domain, options);
+        api = new window.JitsiMeetExternalAPI(domain, options);
 
-        this.api.addEventListeners({
-            readyToClose: this.handleClose,
-            participantLeft: this.handleParticipantLeft,
-            participantJoined: this.handleParticipantJoined,
-            videoConferenceJoined: this.handleVideoConferenceJoined,
-            videoConferenceLeft: this.handleVideoConferenceLeft,
-            audioMuteStatusChanged: this.handleMuteStatus,
-            videoMuteStatusChanged: this.handleVideoStatus
+        api.addEventListeners({
+            readyToClose: handleClose,
+            participantLeft: handleParticipantLeft,
+            participantJoined: handleParticipantJoined,
+            videoConferenceJoined: handleVideoConferenceJoined,
+            videoConferenceLeft: handleVideoConferenceLeft,
+            audioMuteStatusChanged: handleMuteStatus,
+            videoMuteStatusChanged: handleVideoStatus
         });
     }
     
-    handleClose = () => {
+    const handleClose = () => {
         console.log("handleClose");
     }
 
-    handleParticipantLeft = async (participant) => {
+    const handleParticipantLeft = async (participant) => {
         console.log("handleParticipantLeft", participant); // { id: "2baa184e" }
-        const data = await this.getParticipants();
-        this.props.onChildClick(data.length);
+        const data = await getParticipants();
+        props.onChildClick(data.length);
     }
 
-    handleParticipantJoined = async (participant) => {
+    const handleParticipantJoined = async (participant) => {
         console.log("handleParticipantJoined", participant); // { id: "2baa184e", displayName: "Shanu Verma", formattedDisplayName: "Shanu Verma" }
-        const data = await this.getParticipants();
-        this.props.onChildClick(data.length);
+        const data = await getParticipants();
+        props.onChildClick(data.length);
     }
 
-    handleVideoConferenceJoined = async (participant) => {
+    const handleVideoConferenceJoined = async (participant) => {
         console.log("handleVideoConferenceJoined", participant); // { roomName: "bwb-bfqi-vmh", id: "8c35a951", displayName: "Akash Verma", formattedDisplayName: "Akash Verma (me)"}
-        const data = await this.getParticipants();
-        this.props.onChildClick(data.length);
+        const data = await getParticipants();
+        props.onChildClick(data.length);
     }
 
-    handleVideoConferenceLeft = async () => {
+    const handleVideoConferenceLeft = async () => {
         console.log("handleVideoConferenceLeft");
-        const data = await this.getParticipants();
-        this.props.onChildClick(data.length);
-        // return this.props.history.push('/thank-you');
+        const data = await getParticipants();
+        props.onChildClick(data.length);
+        // return props.history.push('/thank-you');
     }
 
-    handleMuteStatus = (audio) => {
+    const handleMuteStatus = (audio) => {
         console.log("handleMuteStatus", audio); // { muted: true }
     }
 
-    handleVideoStatus = (video) => {
+    const handleVideoStatus = (video) => {
         console.log("handleVideoStatus", video); // { muted: true }
     }
 
-    getParticipants() {
+    const getParticipants = () => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(this.api.getParticipantsInfo()); // get all participants
+                resolve(api.getParticipantsInfo()); // get all participants
             }, 500)
         });
     }
 
     // custom events
-    executeCommand(command) {
-        this.api.executeCommand(command);;
+    const executeCommand = (command) => {
+        api.executeCommand(command);;
         if(command == 'hangup') {
-            return this.props.history.push('/thank-you');
+            return props.history.push('/thank-you');
         }
 
         if(command == 'toggleAudio') {
-            this.setState({ isAudioMuted: !this.state.isAudioMuted });
+            setIsAudioMuted(!isAudioMuted);
         }
 
         if(command == 'toggleVideo') {
-            this.setState({ isVideoMuted: !this.state.isVideoMuted });
+            setIsVideoMuted(!isVideoMuted);
         }
     }
 
-    componentDidMount() {
-        if (window.JitsiMeetExternalAPI) {
-            this.startMeet();
-        } else {
-            alert('JitsiMeetExternalAPI not loaded');
-        }
-    }
-
-    render() {
-        const { isAudioMuted, isVideoMuted } = this.state;
-        return (
-            <>
+    return (
+        <>
             <header className="nav-bar">
-                <p className="item-left heading">Jitsi React</p>
+                <p className="item-left heading">{props.activeSession ? 'Live Session'  : 'No Live Session'}</p>
             </header>
-            <div id="jitsi-iframe"></div>
+                <div id="jitsi-iframe" style={{width: '900px'}}></div>
             <div class="item-center">
-                <span>Custom Controls</span>
+                <div className='session-event'>
+                    <div className="session-day">
+                        <div className='imgH3'>
+                            <h3>{props.activeSession.timeStart} - {props.activeSession.timeEnd}</h3>
+                            <img src='/images/conference.png' alt='imggg'/>
+                            <p>{props.activeSession.location ? props.activeSession.location : 'null'}</p>
+                            <p>{props.activeSession.tracks ? props.activeSession.tracks : 'null'}</p>
+                        </div>
+                        <div className="session-events">
+                            <div className="session-event">
+                                <h4>{props.activeSession.sessionTitle ? props.activeSession.sessionTitle : 'null'}</h4>
+                                <p>{props.activeSession.description ? props.activeSession.description : 'null'}</p>
+                                <p>{props.activeSession.authors ? props.activeSession.authors : 'null'}</p>
+                                <p></p>
+                            </div>
+                            <div className="session-buttons">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="item-center">
                 <span>&nbsp;&nbsp;</span>
-                <i onClick={ () => this.executeCommand('toggleAudio') } className={`fas fa-2x grey-color ${isAudioMuted ? 'fa-microphone-slash' : 'fa-microphone'}`} aria-hidden="true" title="Mute / Unmute"></i>
-                <i onClick={ () => this.executeCommand('hangup') } className="fas fa-phone-slash fa-2x red-color" aria-hidden="true" title="Leave"></i>
-                <i onClick={ () => this.executeCommand('toggleVideo') } className={`fas fa-2x grey-color ${isVideoMuted ? 'fa-video-slash' : 'fa-video'}`} aria-hidden="true" title="Start / Stop camera"></i>
-                <i onClick={ () => this.executeCommand('toggleShareScreen') } className="fas fa-film fa-2x grey-color" aria-hidden="true" title="Share your screen"></i>
+                <i onClick={ () => executeCommand('toggleAudio') } className={`fas fa-2x grey-color ${isAudioMuted ? 'fa-microphone-slash' : 'fa-microphone'}`} aria-hidden="true" title="Mute / Unmute"></i>
+                <i onClick={ () => executeCommand('hangup') } className="fas fa-phone-slash fa-2x red-color" aria-hidden="true" title="Leave"></i>
+                <i onClick={ () => executeCommand('toggleVideo') } className={`fas fa-2x grey-color ${isVideoMuted ? 'fa-video-slash' : 'fa-video'}`} aria-hidden="true" title="Start / Stop camera"></i>
+                <i onClick={ () => executeCommand('toggleShareScreen') } className="fas fa-film fa-2x grey-color" aria-hidden="true" title="Share your screen"></i>
             </div>
 
             </>
-        );
-    }
+
+    );
+
 }
 
 export default JitsiComponent;
+
+

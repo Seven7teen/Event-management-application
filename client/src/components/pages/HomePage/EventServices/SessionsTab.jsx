@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillCalendarPlusFill } from 'react-icons/bs';
 import { ImBin } from "react-icons/im";
-import * as xlsx from 'xlsx';
 import './styles.css';
 import firebase from '../../../../firbase';
 import { useAuth } from '../../../Auth/AuthContext';
-import Agenda from './Agenda';
 
 
 const db = firebase.firestore();
 
-const SessionsTab = ({globalEventId}) => {
+const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClickedSession, clickedSession}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activeTab, setActiveTab] = useState('Full Agenda');
   const [importedData, setImportedData] = useState([]);
@@ -21,6 +19,39 @@ const SessionsTab = ({globalEventId}) => {
     endDate: new Date()
   });
   const [myAgenda, setMyAgenda] = useState([]);
+  const [activePart, setActivePart] = useState(9);
+
+  useEffect( async () => {
+     await db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
+      if(doc.exists){
+          const sessionArray = doc.data().sessions;
+          sessionArray.map((item,index) => {
+            if(item.sessionTitle === clickedSession) {
+              console.log("no. of active participant is " + item.activeParticipants);
+              setActivePart(item.activeParticipants);
+            }
+          })   
+          // const data = doc.data().activeParticipants;
+          // setActivePart(data);       
+        }
+  });
+  },[]);
+
+  const showActiveParticipants = async () => {
+     await db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
+      if(doc.exists){
+          const sessionArray = doc.data().sessions;
+          sessionArray.map((item,index) => {
+            if(item.sessionTitle === clickedSession) {
+              console.log("no. of active participant is " + item.activeParticipants);
+              setActivePart(item.activeParticipants);
+            }
+          })
+          // const data = doc.data().activeParticipants;
+          // setActivePart(data);          
+        }
+  });
+  }
 
   const handleAgendaAddition = async (index) => {
     let firstEventIndex = 0;
@@ -80,10 +111,12 @@ const SessionsTab = ({globalEventId}) => {
       db.collection("users").doc(currentUser.uid).onSnapshot((doc) => {
         if(doc.exists){
             const old = (doc.data().eventList[0])[globalEventId];
-            const res = old.filter((item) => {
-              return new Date(item.date).getTime() === currentDate.getTime();
-            })
-            setMyAgenda(res);            
+            if(old) {
+              const res = old.filter((item) => {
+                return new Date(item.date).getTime() === currentDate.getTime();
+              })
+              setMyAgenda(res);       
+            }     
           }
     });
   },[currentDate]);
@@ -129,11 +162,18 @@ useEffect(() => {
 
 
   const handleTabClick = (tabName) => {
-
     setActiveTab(tabName);
   }
 
+  const handleSession = (item) => {
+    setClickedSession(item.sessionTitle);
+    setActiveSession(item);
+    setActiveItem('Contact');
+    console.log(clickedSession);
+  }
+
   return (
+    <>
     <div className="session-tab">
       <div className="session-header">
         <h2>Session Schedule</h2>
@@ -172,8 +212,9 @@ useEffect(() => {
                   <p></p>
                 </div>
                 <div className="session-buttons">
-                  <button type="button" className="btn btn-light">View Session</button>
-
+                  <button type="button" className="btn btn-light" onClick={() => handleSession(item)}>View Session</button>
+                  {item.sessionTitle === clickedSession && 
+                  (<button type="button" className="btn btn-light" onClick={() => showActiveParticipants()}>Active {activePart}</button>)}
                   <button type="button" className="btn btn-light" onClick={() => handleAgendaAddition(index)}>< BsFillCalendarPlusFill /> Add to My Agenda</button>
                 </div>
               </div>
@@ -203,7 +244,9 @@ useEffect(() => {
                               <p></p>
                             </div>
                             <div className="session-buttons">
-                              <button type="button" className="btn btn-light">View Session</button>
+                              <button type="button" className="btn btn-light" onClick={() => handleSession(item)}>View Session</button>
+                              {item.sessionTitle === clickedSession && 
+                                (<button type="button" className="btn btn-light" onClick={() => showActiveParticipants()} >Active {activePart}</button>)}
                               <button type="button" className="btn btn-light" onClick={() => handleAgendaDeletion(index)}>< ImBin /> Remove</button>
                             </div>
                           </div>
@@ -216,6 +259,7 @@ useEffect(() => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
