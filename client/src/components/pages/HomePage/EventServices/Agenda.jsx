@@ -96,12 +96,14 @@ const Agenda = (props) => {
           const wsname = wb.SheetNames[0];
           const ws = wb.Sheets[wsname];
           const excelData = xlsx.utils.sheet_to_json(ws);
-          const agendaData = excelData.map((row) => ({
+          const agendaData = excelData.map((row, index) => ({
               date: row['Date'] ? row['Date']  : 'Not Provided',
               timeStart: row['Time Start'] ? moment().startOf('day').add(row['Time Start'] * 24, 'hours').format("h:mm A")  : 'Not Provided',
               timeEnd: row['Time End'] ? moment().startOf('day').add(row['Time End'] * 24, 'hours').format("h:mm A")  : 'Not Provided',
               tracks: row['Tracks (Optional)'] ? row['Tracks (Optional)']  : 'Not Provided',
               sessionTitle: row['Session Title'] ? row['Session Title']  : 'Not Provided',
+              sessionRoom: `session${index}`,
+              activeParticipants: 0,
               location: row['Room/Location'] ? row['Room/Location'] : 'Not Provided',
               description: row['Description (Optional)'] ? row['Description (Optional)'] : 'Not Provided',
               speakers: row['Speakers (Optional)'] ? row['Speakers (Optional)']  : 'Not Provided',

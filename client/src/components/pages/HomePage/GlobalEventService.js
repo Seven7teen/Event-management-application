@@ -22,19 +22,7 @@ function GlobalEventService() {
       globalEvents: firebase.firestore.FieldValue.arrayUnion(globalEventId)
     });
   },[]);
-
-  // useEffect(async () => {
-  //   let type = 'Attendee';
-  //   await db.collection('globalEvents').doc(globalEventId).get().data().speakers.forEach((item) => {
-  //     if(item.speakerEmail === currentUser.email) {
-  //         type = 'Speaker';
-  //     } else if(currentUser.email === "admin@gmail.com") {
-  //       type = 'Admin';
-  //     }
-  //   });
-  //   setUserType(type);
-  // },[]);
-
+  
   useEffect(async () => {
     // let type = 'Attendee';
       await db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
@@ -57,8 +45,6 @@ function GlobalEventService() {
         <EventNavigation globalEventId={globalEventId} userType={userType}/>
         {/* <h1 className="navigation">Navigation</h1> */}
         <Sidebar globalEventId={globalEventId} userType={userType} />
-        <h1>footer</h1>
-
     </div>
 );
 
