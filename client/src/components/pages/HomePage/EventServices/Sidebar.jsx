@@ -9,6 +9,8 @@ import ChatBox from './ChatBox';
 import './styles.css';
 import { useAuth } from '../../../Auth/AuthContext';
 import firebase from '../../../../firbase';
+import UpdateAttendeeProfile from './UpdateAttendeeProfile';
+import UpdateSpeakerProfile from './UpdateSpeakerProfile';
 
 const db = firebase.firestore();
 
@@ -121,6 +123,9 @@ const Sidebar = (props) => {
         <li className={activeItem === 'Query' ? 'active' : ''} onClick={() => handleItemClick('Query')}>
           Query
         </li>
+        <li className={activeItem === 'Update Profile' ? 'active' : ''} onClick={() => handleItemClick('Update Profile')}>
+          Update Profile
+        </li>
       </ul>
       <div className="main-content" style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
         {/* {activeItem === 'Home' && (
@@ -157,6 +162,16 @@ const Sidebar = (props) => {
           <div >
             {/* <ExcelSheetInput /> */}
             <ChatBox userType={props.userType}/>
+          </div>
+        )}
+        {(activeItem === 'Update Profile' && props.userType === 'Speaker') && (
+          <div >
+          <UpdateSpeakerProfile globalEventId={props.globalEventId} user={currentUser} />
+          </div>
+        )}
+        {(activeItem === 'Update Profile' && props.userType !== 'Speaker') && (
+          <div >
+          <UpdateAttendeeProfile globalEventId={props.globalEventId} user={currentUser} />
           </div>
         )}
       </div>

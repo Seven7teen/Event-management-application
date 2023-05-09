@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
@@ -11,14 +11,26 @@ const db = firebase.firestore();
 
 const SendMessage = ({ scroll, userType }) => {
   const [message, setMessage] = useState("");
+  const [avatarURL, setAvatarURL] = useState("images/other.jpg");
+
+  useEffect( async () => {
+    await db.collection('users').doc(auth.currentUser.uid).get().then((doc) => {
+      if(doc.exists) {
+        const url = doc.data().photoURL;
+        setAvatarURL(url);
+      }
+    })
+  })
+
 
   const sendMessage = async (event) => {
+    console.log(avatarURL);
     event.preventDefault();
     if (message.trim() === "") {
       alert("Enter valid message");
       return;
     }
-    const { uid, displayName, photoURL } = auth.currentUser;
+    const { uid, displayName } = auth.currentUser;
 
 
     // await addDoc(collection(db, "messages"), {
@@ -32,7 +44,7 @@ const SendMessage = ({ scroll, userType }) => {
     await db.collection("messages").add({
         text: message,
         name: displayName,
-        avatar: photoURL,
+        avatar: avatarURL,
         userType: userType,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         uid,
