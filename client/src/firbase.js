@@ -3,6 +3,7 @@ import "@firebase/auth";
 import "@firebase/database";
 import "@firebase/firestore";
 import "@firebase/messaging"
+import "@firebase/storage";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // const firebaseConfig = {
