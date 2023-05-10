@@ -52,6 +52,7 @@ export function AuthProvider({children}){
             console.log(user);
             setCurrentUser(user);
             setLoading(false);
+
             db.collection('users').doc(user.uid).set(({
                 name: user.displayName,
                 photoURL: user.photoURL,

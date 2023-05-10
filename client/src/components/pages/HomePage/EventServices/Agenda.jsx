@@ -103,6 +103,8 @@ const Agenda = (props) => {
               tracks: row['Tracks (Optional)'] ? row['Tracks (Optional)']  : 'Not Provided',
               sessionTitle: row['Session Title'] ? row['Session Title']  : 'Not Provided',
               sessionRoom: `session${index}`,
+              sessionLikes: [],
+              sessionRatings: [],
               activeParticipants: 0,
               location: row['Room/Location'] ? row['Room/Location'] : 'Not Provided',
               description: row['Description (Optional)'] ? row['Description (Optional)'] : 'Not Provided',
