@@ -14,13 +14,17 @@ function GlobalEventService() {
   const { globalEventId } = useParams();
   const {currentUser} = useAuth();
   const location = useLocation();
-  const [userType, setUserType] = useState('User');
+  const [userType, setUserType] = useState('Attendee');
   const myState = location.state;
 
   useEffect(async () => {
     await db.collection('users').doc(myState.currentUserId).update({
       globalEvents: firebase.firestore.FieldValue.arrayUnion(globalEventId)
     });
+    if(currentUser.email.toString() === "iit2019009@iiita.ac.in") {
+      // type = 'Admin';
+      setUserType('Admin');
+    }
   },[]);
   
   useEffect(async () => {
@@ -31,10 +35,7 @@ function GlobalEventService() {
               if(item.speakerEmail === currentUser.email) {
                   // type = 'Speaker';
                   setUserType('Speaker');
-              } else if(currentUser.email.toString() === "iit2019009@iiita.ac.in") {
-                // type = 'Admin';
-                setUserType('Admin');
-              }
+              } 
             });  
           }
       });

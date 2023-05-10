@@ -20,14 +20,16 @@ const EventNavigation = (props) => {
 
 
 
-    useEffect(() => {
-        db.collection("globalEvents").doc(props.globalEventId).onSnapshot((doc) => {
+    useEffect(async () => {
+        await db.collection("globalEvents").doc(props.globalEventId).onSnapshot((doc) => {
             if(doc.exists){
                 setGlobalEvent({
                     globalEventName: doc.data().globalEventName,
                     startDate: doc.data().startDate,
                     endDate: doc.data().endDate
                 })          
+            } else {
+                console.log("error");
             }
         });
     },[]);

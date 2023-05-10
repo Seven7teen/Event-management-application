@@ -11,18 +11,19 @@ import { useAuth } from '../../../Auth/AuthContext';
 import firebase from '../../../../firbase';
 import UpdateAttendeeProfile from './UpdateAttendeeProfile';
 import UpdateSpeakerProfile from './UpdateSpeakerProfile';
+import { set } from 'lodash';
+import HomePageEvent from './HomePageEvent';
 
 const db = firebase.firestore();
 
 
 const Sidebar = (props) => {
-  const [activeItem, setActiveItem] = useState('Attendees');
+  const [activeItem, setActiveItem] = useState('Home');
   // const [click, setClick] = useState(false);
   const [dataFromChild, setDataFromChild] = useState(0);
   const [activeSession, setActiveSession] = useState({});
   const [clickedSession, setClickedSession] = useState('not clicked');
   const {currentUser} = useAuth();
-  const [sessionListIndex, setSessionListIndex] = useState(5000);
 
 
 
@@ -49,30 +50,10 @@ const Sidebar = (props) => {
             });
           }
         });
-        // docref.update({
-        //   'sessions.0.activeParticipants': dataFromChild
-        // })
-        //   .then(() => {
-        //     console.log('Element added to the array successfully!');
-        //   })
-        //   .catch((error) => {
-        //     console.error('Error updating array:', error);
-        //   });
       } else {
         console.log("Doc not found");
       }
     })
-
-
-    // await docref.update({
-    //   activeParticipants: dataFromChild
-    // })
-    // .then(() => {
-    //   console.log('Document updated successfully');
-    // })
-    // .catch((error) => {
-    //   console.error('Error updating document:', error);
-    // });
   },[dataFromChild])
 
   const handleChildData = (data) => {
@@ -89,9 +70,9 @@ const Sidebar = (props) => {
   return (
     <div className="sidebar">
       <ul>
-        {/* <li>
-          {activeSession.sessionTitle}
-        </li> */}
+        <li className={activeItem === 'Home' ? 'active' : ''} onClick={() => handleItemClick('Home')}>
+          Home
+          </li> 
           {
             props.userType === 'Admin' && (
               <li className={activeItem === 'Agenda' ? 'active' : ''} onClick={() => handleItemClick('Agenda')}>
@@ -128,13 +109,9 @@ const Sidebar = (props) => {
         </li>
       </ul>
       <div className="main-content" style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
-        {/* {activeItem === 'Home' && (
-          <div>
-            <MainContent />
-            <h2>Home</h2>
-            <p>Welcome to the Home page!</p>
-          </div>
-        )} */}
+        {activeItem === 'Home' && (
+            <HomePageEvent globalEventId={props.globalEventId}/>
+        )}
         {
           (activeItem === 'Agenda' && props.userType === 'Admin') && (
             (<Agenda globalEventId={props.globalEventId} />)
@@ -166,12 +143,12 @@ const Sidebar = (props) => {
         )}
         {(activeItem === 'Update Profile' && props.userType === 'Speaker') && (
           <div >
-          <UpdateSpeakerProfile globalEventId={props.globalEventId} user={currentUser} />
+          <UpdateSpeakerProfile globalEventId={props.globalEventId} user={currentUser} setActiveItem={setActiveItem} />
           </div>
         )}
         {(activeItem === 'Update Profile' && props.userType !== 'Speaker') && (
           <div >
-          <UpdateAttendeeProfile globalEventId={props.globalEventId} user={currentUser} />
+          <UpdateAttendeeProfile globalEventId={props.globalEventId} user={currentUser} setActiveItem={setActiveItem} />
           </div>
         )}
       </div>

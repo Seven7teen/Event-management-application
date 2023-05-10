@@ -77,6 +77,7 @@ const UpdateAttendeeProfile = (props) => {
             docref.set({attendees: newArrField}, {merge: true})
             .then(() => {
               console.log('Document updated successfully');
+              props.setActiveItem('Attendees');
             })
             .catch((error) => {
               console.error('Error updating document:', error);
@@ -150,7 +151,7 @@ const UpdateAttendeeProfile = (props) => {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary">Register</button>
+      <button type="submit" className="btn btn-primary">Submit</button>
     </form>
   );
 };
