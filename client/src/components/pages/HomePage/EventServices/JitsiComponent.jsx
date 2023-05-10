@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import firebase from '../../../../firbase';
+import LikeButton from './LikeButton';
+import RateButton from './RateButton';
+
 
 const JitsiComponent = (props) => {
     const domain = 'meet.jit.si';
-    // const item = props.activeSession;
     let api = {};
 
-    const [room,setRoom] = useState('random');
-    const [user, setUser] = useState({
-        name: 'taj'
-    });
+    // const [room,setRoom] = useState('random');
+    // const [user, setUser] = useState({
+    //     name: 'taj'
+    // });
     const [isAudioMuted, setIsAudioMuted] = useState(false);
     const [isVideoMuted, setIsVideoMuted] = useState(false);
+
 
     useEffect(() => {
         if (window.JitsiMeetExternalAPI) {
@@ -115,6 +119,10 @@ const JitsiComponent = (props) => {
             </header>
                 <div id="jitsi-iframe" style={{width: '900px'}}></div>
             <div class="item-center">
+                <div>
+                    <LikeButton activeSession={props.activeSession} globalEventId={props.globalEventId} />
+                    <RateButton activeSession={props.activeSession} globalEventId={props.globalEventId} />
+                </div>
                 <div className='session-event'>
                     <div className="session-day">
                         <div className='imgH3'>
