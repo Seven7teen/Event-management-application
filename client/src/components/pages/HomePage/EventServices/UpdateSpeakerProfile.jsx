@@ -90,6 +90,7 @@ const UpdateSpeakerProfile = (props) => {
             docref.set({speakers: newArrField}, {merge: true})
             .then(() => {
               console.log('Document updated successfully');
+              props.setActiveItem('Speakers');
             })
             .catch((error) => {
               console.error('Error updating document:', error);
