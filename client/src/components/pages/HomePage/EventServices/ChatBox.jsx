@@ -8,13 +8,13 @@ import SendMessage from "./SendMessage";
 
 const db = firebase.firestore();
 
-const ChatBox = ({userType}) => {
+const ChatBox = ({userType, globalEventId}) => {
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
 
   useEffect(() => {
 
-    db.collection("messages").orderBy("createdAt").limit(50)
+    db.collection("globalEvents").doc(globalEventId).collection("messages").orderBy("createdAt").limit(50)
     .onSnapshot((querySnapshot) => {
         let messages = [];
         querySnapshot.forEach((doc) => {
@@ -34,7 +34,7 @@ const ChatBox = ({userType}) => {
       </div>
       {/* when a new message enters the chat, the screen scrolls dowwn to the scroll div */}
       <span ref={scroll}></span>
-      <SendMessage scroll={scroll} userType={userType}/>
+      <SendMessage scroll={scroll} userType={userType} globalEventId={globalEventId}/>
     </main>
   );
 };

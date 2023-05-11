@@ -102,7 +102,7 @@ const Sidebar = (props) => {
         </li>
         
         <li className={activeItem === 'Query' ? 'active' : ''} onClick={() => handleItemClick('Query')}>
-          Query
+          Community
         </li>
         <li className={activeItem === 'Update Profile' ? 'active' : ''} onClick={() => handleItemClick('Update Profile')}>
           Update Profile
@@ -138,7 +138,7 @@ const Sidebar = (props) => {
         {activeItem === 'Query' && (
           <div >
             {/* <ExcelSheetInput /> */}
-            <ChatBox userType={props.userType}/>
+            <ChatBox userType={props.userType} globalEventId={props.globalEventId}/>
           </div>
         )}
         {(activeItem === 'Update Profile' && props.userType === 'Speaker') && (
