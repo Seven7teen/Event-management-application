@@ -36,7 +36,10 @@ export function AuthProvider({children}){
             //5 - put the token at localStorage (We'll use this to make requests)
             localStorage.setItem("@token", token);
             //6 - navigate user to the book list
-            history.push("/calendar/"+result.user.uid); 
+            // history.push("/calendar/"+result.user.uid);
+
+            history.push("/");
+
             }
             var usr = result.user;
             console.log(usr);
@@ -55,7 +58,7 @@ export function AuthProvider({children}){
 
             db.collection('users').doc(user.uid).set(({
                 name: user.displayName,
-                photoURL: user.photoURL,
+                // photoURL: user.photoURL,
                 email: user.email
             }),{merge:true}).then(() => {
                 console.log("Document written successfully");
