@@ -9,7 +9,7 @@ import "./chat.css";
 const db = firebase.firestore();
 
 
-const SendMessage = ({ scroll, userType }) => {
+const SendMessage = ({ scroll, userType, globalEventId }) => {
   const [message, setMessage] = useState("");
   const [avatarURL, setAvatarURL] = useState("images/other.jpg");
 
@@ -41,7 +41,7 @@ const SendMessage = ({ scroll, userType }) => {
     //   uid,
     // });
 
-    await db.collection("messages").add({
+    await db.collection("globalEvents").doc(globalEventId).collection("messages").add({
         text: message,
         name: displayName,
         avatar: avatarURL,
