@@ -23,6 +23,11 @@ const Attendees = (props) => {
         setSelectedElement(element);
       };
 
+    const handleChat = async (user2email) => {
+        props.setUser2Id(user2email);
+        props.setActiveItem('OneToOneChat');
+    }
+
     return (
         <>
         <div className="attendee-tab">
@@ -44,7 +49,7 @@ const Attendees = (props) => {
                                         <p>{item.organization ? item.organization : 'null'}</p>
                                     </div>
                                     <div className="attendee-buttons">
-                                        <button type="button" className="btn btn-light btn-sm">Send Message</button>
+                                        <button type="button" className="btn btn-light btn-sm" onClick={() => handleChat(item.attendeeEmail)}>Send Message</button>
                                         <button type="button" className="btn btn-light btn-sm" data-toggle="modal" data-target={"#" + item.attendeeName.replaceAll(' ', '-')} onClick={() => handleElementClick(item)}>View Profile</button>
                                     </div>
 

@@ -31,6 +31,13 @@ const Speakers = (props) => {
         });
     }
 
+    const handleChat = async (user2email) => {
+        props.setUser2Id(user2email);
+        props.setActiveItem('OneToOneChat');
+    }
+
+
+
     return (
         <>
             <div className="speakers-tab">
@@ -67,7 +74,7 @@ const Speakers = (props) => {
                                         <p>Summit 2</p>
                                     </div>
                                     <div className="speakers-buttons">
-                                        <button type="button" className="btn btn-light btn-sm">Send Message</button>
+                                        <button type="button" className="btn btn-light btn-sm" onClick={() => handleChat(item.speakerEmail)}>Send Message</button>
                                     </div>
                                 </div>
                             </div>

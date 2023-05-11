@@ -13,6 +13,7 @@ import UpdateAttendeeProfile from './UpdateAttendeeProfile';
 import UpdateSpeakerProfile from './UpdateSpeakerProfile';
 import { set } from 'lodash';
 import HomePageEvent from './HomePageEvent';
+import OneToOneChat from './OneToOneChat';
 
 const db = firebase.firestore();
 
@@ -23,6 +24,7 @@ const Sidebar = (props) => {
   const [dataFromChild, setDataFromChild] = useState(0);
   const [activeSession, setActiveSession] = useState({});
   const [clickedSession, setClickedSession] = useState('not clicked');
+  const [user2Id, setUser2Id] = useState("not ready");
   const {currentUser} = useAuth();
 
 
@@ -107,6 +109,15 @@ const Sidebar = (props) => {
         <li className={activeItem === 'Update Profile' ? 'active' : ''} onClick={() => handleItemClick('Update Profile')}>
           Update Profile
         </li>
+
+        {
+          user2Id !== 'not ready' && 
+          (<li className={activeItem === 'OneToOneChat' ? 'active' : ''} onClick={() => handleItemClick('OneToOneChat')}>
+          Personal Chat
+        </li>)
+        }
+
+        
       </ul>
       <div className="main-content" style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
         {activeItem === 'Home' && (
@@ -130,10 +141,10 @@ const Sidebar = (props) => {
           </div>
         )}
         {activeItem === 'Speakers' && (
-          <Speakers globalEventId={props.globalEventId} />
+          <Speakers globalEventId={props.globalEventId} setUser2Id={setUser2Id} setActiveItem={setActiveItem} />
         )}
         {activeItem === 'Attendees' && (
-            <Attendees globalEventId={props.globalEventId} />
+            <Attendees globalEventId={props.globalEventId} setUser2Id={setUser2Id} setActiveItem={setActiveItem}/>
         )}
         {activeItem === 'Query' && (
           <div >
@@ -149,6 +160,11 @@ const Sidebar = (props) => {
         {(activeItem === 'Update Profile' && props.userType !== 'Speaker') && (
           <div >
           <UpdateAttendeeProfile globalEventId={props.globalEventId} user={currentUser} setActiveItem={setActiveItem} />
+          </div>
+        )}
+        {(activeItem === 'OneToOneChat') && (
+          <div >
+          <OneToOneChat user2Id={user2Id} />
           </div>
         )}
       </div>
