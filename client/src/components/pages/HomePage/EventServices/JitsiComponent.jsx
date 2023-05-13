@@ -3,6 +3,8 @@ import firebase from '../../../../firbase';
 import LikeButton from './LikeButton';
 import RateButton from './RateButton';
 
+const db = firebase.firestore();
+
 
 const JitsiComponent = (props) => {
     const domain = 'meet.jit.si';
@@ -14,11 +16,25 @@ const JitsiComponent = (props) => {
     // });
     const [isAudioMuted, setIsAudioMuted] = useState(false);
     const [isVideoMuted, setIsVideoMuted] = useState(false);
+    const [queryArray, setQueryArray] = useState([]);
+    const [text, setText] = useState();
+    const [queryText, setQueryText] = useState();
+
+
+    useEffect(async () => {
+        const reference = props.activeSession.sessionQARef;
+        let dataArr = [];
+        await reference.onSnapshot((refdoc) => {
+            if(refdoc.exists) {
+                setQueryArray(refdoc.data().listQA);
+            }
+        });
+    },[]);
 
 
     useEffect(() => {
         if (window.JitsiMeetExternalAPI) {
-            startMeet(props.roomName, props.userName);
+            startMeet(props.roomName, props.user.displayName);
         } else {
             alert('JitsiMeetExternalAPI not loaded');
         }
@@ -112,6 +128,52 @@ const JitsiComponent = (props) => {
         }
     }
 
+    const handleQuerySend = async () => {
+        const reference = props.activeSession.sessionQARef; 
+        await reference.get().then((docref) => {
+            let arr = [];
+            if(docref.exists) {
+                arr = [...docref.data().listQA];
+            }
+            arr.push({
+                query: queryText,
+                queryAsker: props.user.displayName,
+                replies: []
+            })
+
+            reference.set({listQA: arr}, {merge: true})
+                .then(() => {
+                    console.log('Document updated successfully');
+                })
+                .catch((error) => {
+                    console.error('Error updating document:', error);
+                });
+            setQueryText("");
+        })
+    }
+
+    const handleSend = async (index) => {
+        const reference = props.activeSession.sessionQARef
+        await reference.get().then(async (docref) => {
+            const arr = [...docref.data().listQA];
+            const replyArr = [...arr[index].replies];
+            replyArr.push({
+                replyText: text,
+                person: props.user.displayName
+            });
+            const updatedObject = {...arr[index], replies: replyArr};
+            arr[index] = updatedObject;
+
+            await reference.set({listQA: arr}, {merge: true})
+                .then(() => {
+                    console.log('Document updated successfully');
+                })
+                .catch((error) => {
+                    console.error('Error updating document:', error);
+                });
+        })
+    }
+
     return (
         <>
             <header className="nav-bar">
@@ -136,7 +198,6 @@ const JitsiComponent = (props) => {
                                 <h4>{props.activeSession.sessionTitle ? props.activeSession.sessionTitle : 'null'}</h4>
                                 <p>{props.activeSession.description ? props.activeSession.description : 'null'}</p>
                                 <p>{props.activeSession.authors ? props.activeSession.authors : 'null'}</p>
-                                <p></p>
                             </div>
                             <div className="session-buttons">
                                 
@@ -144,6 +205,40 @@ const JitsiComponent = (props) => {
                         </div>
                     </div>
                 </div>
+
+                <div>
+                <input type="text" name='query' onChange={(e) => setQueryText(e.target.value)} value={queryText}/>
+                <button type="button" className="btn btn-light" onClick={() => handleQuerySend()}>Send</button>
+                    
+                </div>
+
+                <div>
+
+                    {queryArray.map((item,index) => {
+                        return (
+                            <div>
+                                <div>{item.query}</div>
+                                <div>{item.queryAsker}</div>
+                                <div>
+                                {
+                                    item.replies.map((x,ind) => {
+                                        return (<div>
+                                            <div>{x.replyText}</div>
+                                            <div>{x.person}</div>
+                                            <br />
+                                        </div>)
+                                    })
+                                }
+                                </div>
+                                <br />
+                                <input type="text" name='reply' onChange={(e) => setText(e.target.value)}/>
+                                <button type="button" className="btn btn-light" onClick={() => handleSend(index)}>Send</button>
+                            </div>
+                        )
+                    })}
+
+                </div>
+
             </div>
             <div class="item-center">
                 <span>&nbsp;&nbsp;</span>

@@ -106,6 +106,7 @@ const Agenda = (props) => {
               sessionLikes: [],
               sessionRatings: [],
               activeParticipants: 0,
+              sessionQARef: db.collection("globalEvents").doc(props.globalEventId).collection("sessionQA").doc(row['Session Title'].substring(0,20) + index),
               location: row['Room/Location'] ? row['Room/Location'] : 'Not Provided',
               description: row['Description (Optional)'] ? row['Description (Optional)'] : 'Not Provided',
               speakers: row['Speakers (Optional)'] ? row['Speakers (Optional)']  : 'Not Provided',

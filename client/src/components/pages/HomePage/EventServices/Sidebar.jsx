@@ -137,7 +137,7 @@ const Sidebar = (props) => {
         {activeItem === 'Contact' && (
           <div>
             {/* <ExcelSheetInput /> */}
-            <JitsiComponent onChildClick={handleChildData} roomName={activeSession.sessionRoom} globalEventId={props.globalEventId} userName={currentUser.displayName} activeSession={activeSession}/>
+            <JitsiComponent onChildClick={handleChildData} roomName={activeSession.sessionRoom} globalEventId={props.globalEventId} user={currentUser} activeSession={activeSession}/>
           </div>
         )}
         {activeItem === 'Speakers' && (
