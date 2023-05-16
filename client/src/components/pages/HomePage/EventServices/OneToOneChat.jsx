@@ -34,6 +34,7 @@ const OneToOneChat = (props) => {
 
     return (
         <>
+            <h3>{props.user2Name}</h3>
             <main className="chat-box">
             <div className="messages-wrapper">
                 {messages?.map((message) => (

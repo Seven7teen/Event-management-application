@@ -27,13 +27,15 @@ body {
   margin: 0  ;
   padding: 0  ;
   /* width: 200px; */
-  background-color: #f8f8f6  ;
+  background-color: #f2f1ef  ;
 }
 
 .sidebar li {
   padding: 10px  ;
   width: 200px  ;
   cursor: pointer  ;
+  font-weight: 600;
+  color: #666;
 }
 
 .sidebar li:hover {
@@ -47,7 +49,7 @@ body {
 .main-content {
   flex: 1  ;
   padding: 20px  ;
-  background-color: #eceff4  ;
+  background-color: #e8ebf3  ;
   /* overflow-y:auto; */
 }
 
@@ -71,18 +73,29 @@ body {
   padding: 10px  ;
   width: 50%  ;
   cursor: pointer  ;
-  text-align: center  ;
+  text-align: center ;
+  /* background-color: #ccc  ; */
+  font-weight: 800;
 }
 
 .agendaTabs.active {
-  background-color: #ccc  ;
+  background-color: #26c1f4;
+  color: #e2ebf2;
+  /* color: #0758ca; */
 }
 
 .session-header h2 {
   margin: 0 ;
 }
 
+.session-buttons {
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 .session-header button {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
   font-size: 1rem  ;
   padding: 0.5rem  ;
   border-radius: 5px  ;
@@ -245,7 +258,16 @@ body {
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem 2rem;
-  flex: 1
+  flex: 1;
+  background-color: #2dadec;
+}
+
+.navigateGlobalEvent .navItem {
+  color: #eceff4;
+}
+
+.userNameNav {
+  width: fit-content;
 }
 
 .eventRightNav {

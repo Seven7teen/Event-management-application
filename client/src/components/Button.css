@@ -9,6 +9,7 @@
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .btn--primary {

@@ -26,6 +26,7 @@ const ChatBox = ({userType, globalEventId}) => {
   }, []);
 
   return (
+    <>
     <main className="chat-box">
       <div className="messages-wrapper">
         {messages?.map((message) => (
@@ -36,6 +37,7 @@ const ChatBox = ({userType, globalEventId}) => {
       <span ref={scroll}></span>
       <SendMessage scroll={scroll} userType={userType} globalEventId={globalEventId}/>
     </main>
+    </>
   );
 };
 

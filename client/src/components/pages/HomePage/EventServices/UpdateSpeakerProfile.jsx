@@ -45,11 +45,18 @@ const UpdateSpeakerProfile = (props) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const storageRef = firebase.storage().ref();
-    const profilePicRef = storageRef.child(profilePic.name);
-    await profilePicRef.put(profilePic);
+    let profilePicUrl = "images/other.jpg";
 
-    const profilePicUrl = await profilePicRef.getDownloadURL();
+    if(profilePic) {
+
+      const storageRef = firebase.storage().ref();
+      const profilePicRef = storageRef.child(profilePic.name);
+      await profilePicRef.put(profilePic);
+
+      profilePicUrl = await profilePicRef.getDownloadURL();
+    }
+
+    
 
     const userRef = db.collection('users').doc(currentUser.uid);
     await userRef.update({

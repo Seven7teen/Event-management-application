@@ -38,18 +38,17 @@ const EventNavigation = (props) => {
 
     return (
         <div className="navigateGlobalEvent">
-            <div>
-            <span className="eventName">{globalEvent.globalEventName}</span>
-            <span>{globalEvent.startDate}</span>
-            <span>--</span>
-            <span>{globalEvent.endDate}</span>
+            <div className="eventLeftNav">
+            <span className="eventName navItem">{globalEvent.globalEventName}</span>
+            <span className="navItem">{globalEvent.startDate}</span>
+            <span className="navItem">--</span>
+            <span className="navItem">{globalEvent.endDate}</span>
             </div>
             <div className="eventRightNav">
-                <div>{props.userType}</div>
-                
-            <p>{currentUser.displayName}</p>
+                <span className="navItem">{props.userType}</span>  
+            <span className="userNameNav navItem">{currentUser.displayName}</span>
             <Link to='/' className='btn-link'>
-                <p>Home</p>
+                <span className="navItem">Home</span>
             {/* <button type="button" className="btn btn-light btn-sm">Home</button> */}
                   </Link>
             </div>
