@@ -31,8 +31,9 @@ const Speakers = (props) => {
         });
     }
 
-    const handleChat = async (user2email) => {
+    const handleChat = async (user2email, user2Name) => {
         props.setUser2Id(user2email);
+        props.setUser2Name(user2Name);
         props.setActiveItem('OneToOneChat');
     }
 
@@ -47,11 +48,11 @@ const Speakers = (props) => {
                         importedData && importedData.map((item, index) => (
 
                             <div className="speakers-day" key={index}>
-                                {/* <div className='imgH3'> */}
+                                <div className='imgH4'>
                                     
                                     <img src={item.speakerProfilePicURL} alt='imggg'/>
                                     
-                                    {/* </div> */}
+                                    </div>
                                     <div className="speakers-events" style={{textAlign: 'left'}}>
                                     <div className="speakers-event">
                                         <h4 style={{padding: "0.5rem 0"}}>{item.speakerName ? item.speakerName : null}</h4>
@@ -74,7 +75,9 @@ const Speakers = (props) => {
                                         <p>Summit 2</p>
                                     </div>
                                     <div className="speakers-buttons">
-                                        <button type="button" className="btn btn-light btn-sm" onClick={() => handleChat(item.speakerEmail)}>Send Message</button>
+                                        {props.myEmail !== item.speakerEmail && 
+                                            <button type="button" className="btn btn-light btn-sm" onClick={() => handleChat(item.speakerEmail, item.speakerName)}>Send Message</button>
+                                        }
                                     </div>
                                 </div>
                             </div>

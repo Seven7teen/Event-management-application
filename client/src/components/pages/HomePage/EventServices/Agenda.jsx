@@ -86,6 +86,18 @@ const Agenda = (props) => {
     };
     };
 
+    function generateRandomString(size) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        
+        for (let i = 0; i < size; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          result += characters[randomIndex];
+        }
+        
+        return result;
+      }
+
     const handleSessionsFile = (e) => {
         const files = e.target.files;
         const fileReader = new FileReader();
@@ -96,16 +108,19 @@ const Agenda = (props) => {
           const wsname = wb.SheetNames[0];
           const ws = wb.Sheets[wsname];
           const excelData = xlsx.utils.sheet_to_json(ws);
+        //   const randomString = generateRandomString(5);
           const agendaData = excelData.map((row, index) => ({
+              sessionId: generateRandomString(5),
               date: row['Date'] ? row['Date']  : 'Not Provided',
               timeStart: row['Time Start'] ? moment().startOf('day').add(row['Time Start'] * 24, 'hours').format("h:mm A")  : 'Not Provided',
               timeEnd: row['Time End'] ? moment().startOf('day').add(row['Time End'] * 24, 'hours').format("h:mm A")  : 'Not Provided',
               tracks: row['Tracks (Optional)'] ? row['Tracks (Optional)']  : 'Not Provided',
               sessionTitle: row['Session Title'] ? row['Session Title']  : 'Not Provided',
-              sessionRoom: `session${index}`,
+              sessionRoom: `session${generateRandomString(5)}`,
               sessionLikes: [],
               sessionRatings: [],
               activeParticipants: 0,
+              sessionImageUrl: "/images/conference.png",
               sessionQARef: db.collection("globalEvents").doc(props.globalEventId).collection("sessionQA").doc(row['Session Title'].substring(0,20) + index),
               location: row['Room/Location'] ? row['Room/Location'] : 'Not Provided',
               description: row['Description (Optional)'] ? row['Description (Optional)'] : 'Not Provided',

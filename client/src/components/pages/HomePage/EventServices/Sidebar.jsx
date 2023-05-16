@@ -25,6 +25,7 @@ const Sidebar = (props) => {
   const [activeSession, setActiveSession] = useState({});
   const [clickedSession, setClickedSession] = useState('not clicked');
   const [user2Id, setUser2Id] = useState("not ready");
+  const [user2Name, setUser2Name] = useState("nor");
   const {currentUser} = useAuth();
 
 
@@ -141,10 +142,10 @@ const Sidebar = (props) => {
           </div>
         )}
         {activeItem === 'Speakers' && (
-          <Speakers globalEventId={props.globalEventId} setUser2Id={setUser2Id} setActiveItem={setActiveItem} />
+          <Speakers globalEventId={props.globalEventId} setUser2Id={setUser2Id} setUser2Name={setUser2Name} setActiveItem={setActiveItem} myEmail= {currentUser.email} />
         )}
         {activeItem === 'Attendees' && (
-            <Attendees globalEventId={props.globalEventId} setUser2Id={setUser2Id} setActiveItem={setActiveItem}/>
+            <Attendees globalEventId={props.globalEventId} setUser2Id={setUser2Id} setUser2Name={setUser2Name} setActiveItem={setActiveItem} myEmail= {currentUser.email} activateItem={setActiveItem}/>
         )}
         {activeItem === 'Query' && (
           <div >
@@ -164,7 +165,7 @@ const Sidebar = (props) => {
         )}
         {(activeItem === 'OneToOneChat') && (
           <div >
-          <OneToOneChat user2Id={user2Id} />
+          <OneToOneChat user2Id={user2Id} user2Name={user2Name} />
           </div>
         )}
       </div>

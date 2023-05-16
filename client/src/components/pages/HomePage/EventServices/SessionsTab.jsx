@@ -4,6 +4,8 @@ import { ImBin } from "react-icons/im";
 import './styles.css';
 import firebase from '../../../../firbase';
 import { useAuth } from '../../../Auth/AuthContext';
+import AddSession from './AddSession';
+import EditSession from './EditSession';
 
 
 const db = firebase.firestore();
@@ -12,6 +14,7 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activeTab, setActiveTab] = useState('Full Agenda');
   const [importedData, setImportedData] = useState([]);
+  const [oldData, setOldData] = useState([]);
   const [dayWiseData, setdayWiseData] = useState([]);
   const {currentUser} = useAuth();
   const [duration, setDuration] = useState({
@@ -20,6 +23,8 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
   });
   const [myAgenda, setMyAgenda] = useState([]);
   const [activePart, setActivePart] = useState(9);
+  const [open,setOpen] = useState(false);
+  const [editOpenArr, setEditOpenArr] = useState([]);
 
   useEffect( async () => {
      await db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
@@ -89,20 +94,31 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
             console.error('Error updating array:', error);
           });
       }
-    })
+    });
     
   }
 
 
-  useEffect(() => {
-      db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
+  useEffect(async () => {
+      await db.collection("globalEvents").doc(globalEventId).onSnapshot(async (doc) => {
         if(doc.exists){
             const old = doc.data().sessions;
-            const res = old.filter((item) => {
+            let localEditOpenArr = Array(old.length).fill(false);
+            const res = await old.filter((item) => {
               return new Date(item.date).getTime() === currentDate.getTime();
-            })
-            setImportedData(res);            
-          }
+            });
+            const sortedArr = await res.sort((a, b) => {
+              const timeA = new Date("1970/01/01 " + a.timeStart);
+              const timeB = new Date("1970/01/01 " + b.timeStart);
+            
+              return timeA - timeB;
+            });
+            setOldData(old);
+            // setCurrentDate(new Date(doc.data().startDate));
+            setImportedData(sortedArr);  
+            setEditOpenArr(localEditOpenArr);    
+            console.log(old);      
+          } 
     });
   },[currentDate]);
 
@@ -114,8 +130,14 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
             if(old) {
               const res = old.filter((item) => {
                 return new Date(item.date).getTime() === currentDate.getTime();
-              })
-              setMyAgenda(res);       
+              });
+              const sortedArr = res.sort((a, b) => {
+                const timeA = new Date("1970/01/01 " + a.timeStart);
+                const timeB = new Date("1970/01/01 " + b.timeStart);
+              
+                return timeA - timeB;
+              });
+              setMyAgenda(sortedArr);       
             }     
           }
     });
@@ -172,11 +194,54 @@ useEffect(() => {
     console.log(clickedSession);
   }
 
+  const handleAddSession = () => {
+    setOpen(true);
+  }
+
+  // const deleteSession = async (id) => {
+  //   const docref = db.collection("globalEvents").doc(globalEventId);
+  //   await docref.get().then(async (doc) => {
+  //     if(doc.exists) {
+  //       let arr = [...doc.data().sessions];
+  //       const index = arr.findIndex(obj => obj.sessionId === id);
+  //       arr.splice(index,1);
+  //       await docref.update({
+  //         sessions: arr
+  //       }).then(() => {
+  //         console.log("Document deleted successfully");
+  //         let updatedArr = [...editOpenArr];
+  //         updatedArr.splice(index,1);
+  //         setEditOpenArr(updatedArr);
+  //     }).catch(err => {
+  //         console.error("Error: "+err);
+  //     });
+  //     }
+  //   })
+  // }
+
+  const handleEditSession = async (id) => {
+    const docref = db.collection("globalEvents").doc(globalEventId);
+    await docref.get().then(async (doc) => {
+      if(doc.exists) {
+        let arr = [...doc.data().sessions];
+        const index = arr.findIndex(obj => obj.sessionId === id);
+        let updatedArr = [...editOpenArr];
+        updatedArr[index] = true;
+        setEditOpenArr(updatedArr);
+        console.log(updatedArr);
+      }
+    })
+  }
+
   return (
     <>
     <div className="session-tab">
       <div className="session-header">
-        <h2>Session Schedule</h2>
+        <div>
+        <button type='button' className='btn btn-sm-light' onClick={handleAddSession} >Add Session</button>
+        <AddSession open={open} setOpen={setOpen} sessionArrayLength={importedData.length} globalEventId={globalEventId} editOpenArr={editOpenArr} setEditOpenArr={setEditOpenArr}/>
+        </div>
+        <h4 style={{marginBottom: "0"}}>Session Schedule</h4>
         <button onClick={handlePreviousDayClick}>Previous Day</button>
         <span>{currentDate.toDateString()}</span>
         <button onClick={handleNextDayClick}>Next Day</button>
@@ -200,7 +265,7 @@ useEffect(() => {
               <div className="session-day" key={index}>
               <div className='imgH3'>
                 <h3>{item.timeStart} - {item.timeEnd}</h3>
-                <img src='/images/conference.png' alt='imggg'/>
+                <img src={item.sessionImageUrl} alt='imggg'/>
                 <p>{item.location ? item.location : 'null'}</p>
                 <p>{item.tracks ? item.tracks : 'null'}</p>
               </div>
@@ -216,11 +281,22 @@ useEffect(() => {
                   {item.sessionTitle === clickedSession && 
                   (<button type="button" className="btn btn-light" onClick={() => showActiveParticipants()}>Active {activePart}</button>)}
                   <button type="button" className="btn btn-light" onClick={() => handleAgendaAddition(index)}>< BsFillCalendarPlusFill /> Add to My Agenda</button>
+                  {/* <button type="button" className="btn btn-light" onClick={() => deleteSession(item.sessionId)}>< BsFillCalendarPlusFill />Delete</button> */}
+                  {currentUser.email === "iit2019009@iiita.ac.in" && <button type="button" className="btn btn-light" onClick={() => handleEditSession(item.sessionId)}>Edit</button>}
+                  {/* <EditSession open={editOpenArr} setOpen={setEditOpenArr} element={item} globalEventId={globalEventId}/> */}
                 </div>
               </div>
             </div>
             </div>
             ))}
+
+
+
+            {oldData && oldData.map((item) => 
+              (
+              <EditSession open={editOpenArr} setOpen={setEditOpenArr} element={item} globalEventId={globalEventId}/>
+              )
+            )}
             
           </div>
         )}
@@ -232,7 +308,7 @@ useEffect(() => {
                           <div className="session-day" key={index}>
                           <div className='imgH3'>
                             <h3>{item.timeStart} - {item.timeEnd}</h3>
-                            <img src='/images/conference.png' alt='imggg'/>
+                            <img src={item.sessionImageUrl} alt='imggg'/>
                             <p>{item.location ? item.location : 'null'}</p>
                             <p>{item.tracks ? item.tracks : 'null'}</p>
                           </div>
