@@ -7,6 +7,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
 import {useAuth} from '../Auth/AuthContext';
 
+
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
@@ -60,7 +61,7 @@ function Navbar() {
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <nav className='navbar'>
-          <div className='navbar-container container1'>
+          <div className='navbar-container container1 homeTabName'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
               <MdFingerprint className='navbar-icon' />
               EvenTo
@@ -93,6 +94,22 @@ function Navbar() {
                 </Link>
               </li> */}
               <li className='nav-item'>
+              {/* {currentUser &&
+                (<Link
+                  to={`/calendar/${currentUser.providerData[0].uid}`}
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+                >Calendar</Link>) 
+              } */}
+              {currentUser &&
+                (<Link
+                  to={`/globalEvents`}
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+                >Events</Link>) 
+              }
+              </li>
+              {/* <li className='nav-item'>
               {currentUser &&
                 (<Link
                   to={`/calendar/${currentUser.providerData[0].uid}`}
@@ -100,7 +117,8 @@ function Navbar() {
                   onClick={closeMobileMenu}
                 >Calendar</Link>) 
               }
-              </li>
+              
+              </li> */}
               <li className='nav-btn'>
                 {button ? (
                   !currentUser ? (

@@ -15,7 +15,7 @@ function Home() {
       <Navbar/>
       <HeroSection {...homeObjOne} />
       <HeroSection {...homeObjFour} />
-      {currentUser !== null ? <GlobalEvents /> : <></>}
+      {/* {currentUser !== null ? <GlobalEvents /> : <></>} */}
       <Footer/>
     </>
   );

@@ -1,15 +1,15 @@
 .img-container {
-    max-width: 830px;
-    max-height: 470px;
-    width: auto;
-    height: auto;
+    max-width: 830px  ;
+    max-height: 470px ;
+    width: auto ;
+    height: auto ;
 }
 
 .event-description {
     /* padding: 1rem; */
     margin: 10px;
     border-radius: 1%;
-    border: 1px solid #cccbcb ;
+    /* border: 1px solid #cccbcb ; */
     text-align: justify;
 }
 
@@ -23,6 +23,8 @@
 
 .flexItem.main {
     flex: 3;
+    /* background-color: #f2f1ef; */
+    padding: 1rem;
 }
 
 .flexItem.sponsor {
@@ -37,7 +39,7 @@
     width: auto  ;
     height: 100%  ;
     background-color: #fff  ;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2)  ;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2)  ;
   }
 
   .sponsor-events {
@@ -79,4 +81,36 @@
 
   .imgH3 {
     text-align: center  ;
+  }
+
+  .darkBg {
+    background-image: url("asset/bg_1.jpg");
+  
+    /* Set a specific height */
+    /* min-height: 500px; */
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: stretch;
+    
+  }
+
+  .lightBg {
+    background-image: url("asset/bg_2.jpg");
+  
+    /* Set a specific height */
+    /* min-height: 500px; */
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: stretch;
+    
+  }
+
+  .homePageNoback {
+    background-color: #f2f1ef;
   }

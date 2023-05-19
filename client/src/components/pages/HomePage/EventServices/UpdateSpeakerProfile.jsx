@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import firebase from "../../../../firbase";
 import { useAuth } from '../../../Auth/AuthContext';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 
 const db = firebase.firestore();
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
 const UpdateSpeakerProfile = (props) => {
+  const classes = useStyles();
     const {currentUser} = useAuth();
   const [speakerName, setSpeakerName] = useState('');
   const [speakerAffiliation, setSpeakerAffiliation] = useState('');
@@ -121,55 +134,78 @@ const UpdateSpeakerProfile = (props) => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} className={classes.root} style={{backgroundColor: "#f2f1ef", padding: "1.5rem"}}>
 
-      <div className="mb-3">
-        <label htmlFor="speakerName" className="form-label">Speaker Name:</label>
-        <input
-          type="text"
-          className="form-control"
-          id="speakerName"
-          value={speakerName}
-          onChange={(e) => setSpeakerName(e.target.value)}
-        />
-      </div>
+      <label htmlFor="speakerName">Speaker Name:</label>
+      <TextField required id="speakerName" placeholder="Name" value={speakerName} onChange={(e) => setSpeakerName(e.target.value)}/>
 
-      <div className="mb-3">
-        <label htmlFor="speakerAffiliation" className="form-label">Organization:</label>
-        <input
-          type="text"
-          className="form-control"
-          id="speakerAffiliation"
+
+        <label htmlFor="speakerAffiliation">Affiliation:</label>
+        <TextField
+          required id="speakerAffiliation"
           value={speakerAffiliation}
+          placeholder='Affiliation'
           onChange={(e) => setSpeakerAffiliation(e.target.value)}
         />
-      </div>
 
-      <div className="mb-3">
-        <label htmlFor="speakerEducation" className="form-label">Profession:</label>
+      <label htmlFor="speakerEducation">Education:</label>
+              <TextField
+                required id="speakerEducation"
+                value={speakerEducation}
+                placeholder='Education'
+                onChange={(e) => setSpeakerEducation(e.target.value)}
+              />
+
+        <label htmlFor="speakerPosition">Position:</label>
+              <TextField
+                required id="speakerPosition"
+                value={speakerPosition}
+                placeholder='Position'
+                onChange={(e) => setSpeakerPosition(e.target.value)}
+              />
+
+      <label htmlFor="speakerLocation">Location:</label>
+              <TextField
+                required id="speakerLocation"
+                value={speakerLocation}
+                placeholder='Location'
+                onChange={(e) => setSpeakerLocation(e.target.value)}
+              />
+
+      <label htmlFor="speakerPersonalWebsites">Personal Websites:</label>
+              <TextField
+                required id="speakerPersonalWebsites"
+                value={speakerPersonalWebsites}
+                placeholder='Personal Websites'
+                onChange={(e) => setSpeakerPersonalWebsites(e.target.value)}
+              />
+
+        <label htmlFor="profilePic">Profile Picture:</label>
         <input
-          type="text"
-          className="form-control"
-          id="speakerEducation"
-          value={speakerEducation}
-          onChange={(e) => setSpeakerEducation(e.target.value)}
-        />
-      </div>
-
-      <div className='mb-3'>
-          <label for="speakerBio">Bio:</label>
-          <textarea className="form-control" id="speakerBio" rows="3" value={speakerBio}  onChange={(e) => setSpeakerBio(e.target.value)}/>
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="profilePic" className="form-label">Profile Picture:</label>
-        <input
+        style={{display: "inline-block"}}
           type="file"
           className="form-control"
           id="profilePic"
           onChange={handleProfilePicChange}
         />
+
+      {/* </div> */}
+      <div style={{width: "100%"}}>
+        <label htmlFor="bio">Bio:</label>
+        <TextField
+            id="bio"
+            placeholder="Bio(max 1000 char)"
+            multiline
+            // rows={4}
+            // variant="outlined"
+            value={speakerBio}
+            onChange={(e) => setSpeakerBio(e.target.value) }
+            inputProps={{maxLength: 1000}}
+            fullWidth
+        />
       </div>
+      
+     
 
       <button type="submit" className="btn btn-primary">Submit</button>
     </form>

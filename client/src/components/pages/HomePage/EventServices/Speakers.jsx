@@ -51,13 +51,29 @@ const Speakers = (props) => {
                                 <div className='imgH4'>
                                     
                                     <img src={item.speakerProfilePicURL} alt='imggg'/>
+
+                                    <div className="speakers-events" style={{textAlign: 'left'}}>
+                                    <div className="speakers-event">
+                                        <h4 style={{padding: "0.5rem 0"}}>Education</h4>
+                                        <p>{item.speakerEducation}</p>
+                                    </div>
+                                    <div className="speakers-event">
+                                        <h4 style={{padding: "0.5rem 0"}}>Location</h4>
+                                        <p>{item.speakerLocation}</p>
+                                    </div>
+
+                                    {/* <div className="speakers-event">
+                                        <h4 style={{padding: "0.5rem 0"}}>Position</h4>
+                                        <p>{item.speakerPosition}</p>
+                                    </div> */}
+                                    </div>
                                     
                                     </div>
                                     <div className="speakers-events" style={{textAlign: 'left'}}>
                                     <div className="speakers-event">
                                         <h4 style={{padding: "0.5rem 0"}}>{item.speakerName ? item.speakerName : null}</h4>
-                                        <p>{item.speakerAffiliation ? item.speakerAffiliation : 'null'}</p>
-                                        <p>Speakers</p>
+                                        <p>{item.speakerPosition ? item.speakerPosition : 'null'}</p>
+                                        {/* <p>Speakers</p> */}
                                     </div>
                                     <div className="speakers-event">
                                         <h4 style={{padding: "0.5rem 0"}}>Bio</h4>
@@ -69,10 +85,17 @@ const Speakers = (props) => {
                                        
                                         
                                     </div>
+
                                     <div className="speakers-event">
-                                        <h4 style={{padding: "0.5rem 0"}}>Speaking at</h4>
-                                        <p>Summit 1</p>
-                                        <p>Summit 2</p>
+                                        <h4 style={{padding: "0.5rem 0"}}>Affiliation</h4>
+                                        <p>{item.speakerAffiliation}</p>
+                                    </div>
+                                   
+                                   
+
+                                    <div className="speakers-event">
+                                        <h4 style={{padding: "0.5rem 0"}}>Personal Website</h4>
+                                        <p>{item.speakerPersonalWebsites}</p>
                                     </div>
                                     <div className="speakers-buttons">
                                         {props.myEmail !== item.speakerEmail && 

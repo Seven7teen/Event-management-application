@@ -18,7 +18,7 @@ function HeroSection({
   return (
     <>
       <div
-        className={lightBg ? 'home__hero-section' : 'home__hero-section darkBg'}
+        className={lightBg ? 'home__hero-section' : 'home__hero-section lightBg'}
       >
         <div className='container'>
           <div
@@ -29,6 +29,7 @@ function HeroSection({
             }}
           >
             <div className='col'>
+            
               <div className='home__hero-text-wrapper'>
                 <div className='top-line'>{topLine}</div>
                 <h1 className={lightText ? 'heading' : 'heading dark'}>
@@ -52,6 +53,7 @@ function HeroSection({
             </div>
             <div className='col img'>
               <div className='home__hero-img-wrapper'>
+              {/* <img src='images/other.jpg'/> */}
               </div>
             </div>
           </div>
