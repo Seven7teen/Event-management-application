@@ -62,8 +62,21 @@
   color: #494dc4;
 }
 
-.darkBg {
+.lightBg {
   background-image: url("assets/bg_2.jpg");
+
+  /* Set a specific height */
+  min-height: 500px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.darkBg {
+  background-image: url("assets/bg_1.jpg");
 
   /* Set a specific height */
   min-height: 500px;
@@ -80,6 +93,7 @@
   margin-bottom: 35px;
   font-size: 18px;
   line-height: 24px;
+  color: #0d56e7;
 }
 
 .home__hero-img-wrapper {
@@ -97,7 +111,7 @@
 
 img {
   border: 0;
-  max-width: 100%;
+  width: 300px;
   vertical-align: middle;
   display: inline-block;
 }

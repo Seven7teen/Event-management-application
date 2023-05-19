@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../../../firbase';
 import { useAuth } from '../../../Auth/AuthContext';
+import StarRatingComponent from 'react-star-rating-component';
 import { has } from 'lodash';
+import { BsFillStarFill } from "react-icons/bs";
+
 
 const db = firebase.firestore();
 
@@ -38,8 +41,9 @@ const RateButton = (props) => {
 
   },[rating]);
 
-  const handleRatingChange = async (event) => {
-    const selectedRating = parseInt(event.target.value);
+  const handleRatingChange = async (selectedRating) => {
+    console.log(selectedRating);
+    // const selectedRating = parseInt(event.target.value);
     const newObj = {
       userId: currentUser.uid,
       rating: selectedRating
@@ -90,10 +94,27 @@ const RateButton = (props) => {
   };
 
   return (
-    <div>
-      <div>{avgRating}</div>
-      <label>
+    <>
+    <span style={{marginRight: "630px", display: "flex", alignItems: "center"}}>
+      <BsFillStarFill style={{fontSize: "25px", color: "#FFB400"}}/>
+      <span> {avgRating}</span>
+      </span>
+      {/* <div>{avgRating}</div> */}
+      <div>
+        <div>Your Rating</div>
+      <StarRatingComponent 
+          name="rate1" 
+          starCount={5}
+          renderStarIcon={() => <span><BsFillStarFill style={{fontSize: "18px"}}/></span>}
+          value={rating}
+          onStarClick={handleRatingChange }
+        />
+      </div>
+      
+        {/* <span>Average Rating</span> */}
+      {/* <label>
         Rate this item:
+
         <select value={rating} onChange={handleRatingChange}>
           <option value={0}>Select Rating</option>
           <option value={1}>1 Star</option>
@@ -102,8 +123,8 @@ const RateButton = (props) => {
           <option value={4}>4 Stars</option>
           <option value={5}>5 Stars</option>
         </select>
-      </label>
-    </div>
+      </label> */}
+    </>
   );
 };
 

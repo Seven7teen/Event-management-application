@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../../../firbase';
 import { useAuth } from '../../../Auth/AuthContext';
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 const db = firebase.firestore();
+
+
 
 const LikeButton = (props) => {
   const [liked, setLiked] = useState(false);
@@ -83,13 +86,12 @@ const LikeButton = (props) => {
           }
         })
   }
-
   return (
-    <div>
-      <button type='button' className='btn btn-sm btn-primary' onClick={handleLikeUnlike}>
-        {liked ? 'Unlike' : 'Like'}
-      </button>
-      <span>{likeCount} Likes</span>
+    <div style={{display: "flex", alignItems: "center"}} >
+      <div onClick={handleLikeUnlike}>
+      {liked ? <AiFillLike fontSize="25px" color='#F44336' /> : <AiOutlineLike fontSize="25px" />}
+      </div>
+      <div>{likeCount} {likeCount > 1 ? (<span>Likes</span>) : (<span>Like</span>) }</div>
     </div>
   );
 };

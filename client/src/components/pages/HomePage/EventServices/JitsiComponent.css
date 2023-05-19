@@ -1,0 +1,72 @@
+.query {
+    background-color: #f0f0f0;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    margin: 1rem 0 1rem 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2)  ;
+}
+
+.query .authorName {
+    font-weight: bold;
+    color: rgb(68, 68, 218);
+}
+
+.message {
+    text-align: left;
+    margin: 0.5rem 0 1rem 55px;
+}
+
+.query .message {
+    margin-bottom: 5px;
+
+}
+
+.replies {
+    margin-left: 50px;
+}
+
+.reply {
+    background-color: #d9d9d9;
+    padding: 5px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+.author {
+    font-weight: bold;
+    display: flex;
+    /* align-items: center; */
+}
+
+.reply .message {
+    margin: 0.5rem 0 1 0;
+}
+
+.country-flag {
+ width: 50px;
+ height: 50px;
+ vertical-align: text-top;
+ margin: 0 7px 0 0px;
+ border: 1px solid #fff;
+ border-radius: 50px;
+ box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2)  ;
+}
+
+.createdAtTheme {
+    /* margin-left: 5rem !important; */
+    color: rgb(125, 123, 123);
+    font-weight: 300;
+    font-style: italic;
+    font-size: small;
+}
+
+
+.replyText {
+    margin-left: 20px;
+}
+
+.message.queryItem {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc  ;
+    margin-left: 55px;
+  }
+

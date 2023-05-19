@@ -32,20 +32,15 @@ const HomePageEvent = (props) => {
     })
 
     return (
-        <div className="flex-container">
+        <div className="flex-container homePageNoback">
             <div className="flexItem main">
-                {/* <div className="sponsors"></div> */}
-                <div className="img-container">
-                <img src={eventPictureUrl} alt="imgg"/>
-                </div>
+                <img className="img-container" src={eventPictureUrl} alt="imgg"/>
+                <div style={{backgroundColor: "#f2f1ef"}}>
                 <div style={{textAlign: "left", color: "#60686b", margin: "1rem 0.5rem 0 0.5rem"}}>Event Description</div>
                 <div className="event-description">
                     {desc}
                 </div>
-                
-                {/* <p>{startDate}</p>
-                <p>{endDate}</p>
-                <p>{title}</p> */}
+                </div>
                 
             </div>
             <div className="flexItem sponsor">

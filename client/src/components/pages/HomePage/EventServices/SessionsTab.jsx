@@ -65,7 +65,7 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
     then((doc) => {
       if(doc.exists) {
         docref.update({
-          [`eventList.${firstEventIndex}.${globalEventId}`]: firebase.firestore.FieldValue.arrayUnion(importedData[index])
+          [`eventList.${globalEventId}`]: firebase.firestore.FieldValue.arrayUnion(importedData[index])
         })
           .then(() => {
             console.log('Element added to the array successfully!');
@@ -85,7 +85,7 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
     then((doc) => {
       if(doc.exists) {
         docref.update({
-          [`eventList.${firstEventIndex}.${globalEventId}`]: firebase.firestore.FieldValue.arrayRemove(myAgenda[index])
+          [`eventList.${globalEventId}`]: firebase.firestore.FieldValue.arrayRemove(myAgenda[index])
         })
           .then(() => {
             console.log('Element added to the array successfully!');
@@ -123,10 +123,10 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
   },[currentDate]);
 
 
-  useEffect(() => {
-      db.collection("users").doc(currentUser.uid).onSnapshot((doc) => {
+  useEffect(async () => {
+      await db.collection("users").doc(currentUser.uid).onSnapshot((doc) => {
         if(doc.exists){
-            const old = (doc.data().eventList[0])[globalEventId];
+            const old = (doc.data().eventList)[globalEventId];
             if(old) {
               const res = old.filter((item) => {
                 return new Date(item.date).getTime() === currentDate.getTime();
@@ -143,8 +143,8 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
     });
   },[currentDate]);
 
-  useEffect(() => {
-    db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
+  useEffect(async () => {
+    await db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
       if(doc.exists){
           setDuration({
             startDate: new Date(doc.data().startDate),
@@ -155,8 +155,8 @@ const SessionsTab = ({globalEventId, setActiveSession, setActiveItem, setClicked
   });
 },[]);
 
-useEffect(() => {
-  db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
+useEffect(async () => {
+  await db.collection("globalEvents").doc(globalEventId).onSnapshot((doc) => {
     if(doc.exists){
         setCurrentDate(new Date(doc.data().startDate));            
       }
@@ -238,7 +238,7 @@ useEffect(() => {
     <div className="session-tab">
       <div className="session-header">
         <div>
-        <button type='button' className='btn btn-sm-light' onClick={handleAddSession} >Add Session</button>
+        {currentUser.email === "iit2019009@iiita.ac.in" && <button type='button' className='btn btn-sm-light' onClick={handleAddSession} >Add Session</button>}
         <AddSession open={open} setOpen={setOpen} sessionArrayLength={importedData.length} globalEventId={globalEventId} editOpenArr={editOpenArr} setEditOpenArr={setEditOpenArr}/>
         </div>
         <h4 style={{marginBottom: "0"}}>Session Schedule</h4>
@@ -264,7 +264,8 @@ useEffect(() => {
               <div className='session-event'>
               <div className="session-day" key={index}>
               <div className='imgH3'>
-                <h3>{item.timeStart} - {item.timeEnd}</h3>
+                {(item.timeStart && item.timeEnd) && <h3>{item.timeStart} - {item.timeEnd}</h3>}
+                
                 <img src={item.sessionImageUrl} alt='imggg'/>
                 <p>{item.location ? item.location : 'null'}</p>
                 <p>{item.tracks ? item.tracks : 'null'}</p>

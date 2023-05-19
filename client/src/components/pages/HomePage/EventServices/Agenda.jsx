@@ -4,11 +4,24 @@ import './styles.css';
 import './speaker-styles.css';
 import firebase from '../../../../firbase';
 import moment from 'moment';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
 
 
 const db = firebase.firestore();
 
 const Agenda = (props) => {
+    const classes = useStyles();
     const [rawSpeakerData, setRawSpeakerData] = useState([]);
     const [rawAttendeeData, setRawAttendeeData] = useState([]);
     const [rawSessionsData, setRawSessionsData] = useState([]);
@@ -132,21 +145,48 @@ const Agenda = (props) => {
       };
 
     return (
-        <div className="inputTab">
-            <div class="form-group">
+        <div className={classes.root} style={{backgroundColor: "#f2f1ef", padding: "1.5rem"}}>
+            {/* <div class="form-group">
                 <label for="attendees">Attendees File</label>
-                <input type="file" class="form-control" id="attendees" onChange={handleAttendeesFile} />
-            </div>
+                <input type="file" class="form-control fileDisplay" id="attendees" onChange={handleAttendeesFile} />
+            </div> */}
+    
+            <label htmlFor="attendees">Attendees File:</label>
+            <input
+            style={{display: "inline-block"}}
+            type="file"
+            className="form-control"
+            id="attendees"
+            onChange={handleAttendeesFile}
+            />
 
-            <div class="form-group">
+            {/* <div class="form-group">
                 <label for="speakers">Speakers File</label>
-                <input type="file" class="form-control" id="speakers" onChange={handleSpeakersFile} />
-            </div>
+                <input type="file" class="form-control fileDisplay" id="speakers" onChange={handleSpeakersFile} />
+            </div> */}
 
-           <div class="form-group">
+            <label htmlFor="speakers">Speakers File:</label>
+            <input
+            style={{display: "inline-block"}}
+            type="file"
+            className="form-control"
+            id="speakers"
+            onChange={handleSpeakersFile}
+            />
+
+            <label htmlFor="sessions">Sessions File:</label>
+            <input
+            style={{display: "inline-block"}}
+            type="file"
+            className="form-control"
+            id="sessions"
+            onChange={handleSessionsFile}
+            />
+
+           {/* <div class="form-group">
                 <label for="sessions">Sessions File</label>
-                <input type="file" class="form-control" id="sessions" onChange={handleSessionsFile} />
-            </div>
+                <input type="file" style={{display: "inline-block"}} class="form-control" id="sessions" onChange={handleSessionsFile} />
+            </div> */}
         </div>
     );
 

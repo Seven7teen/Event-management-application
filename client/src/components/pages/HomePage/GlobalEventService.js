@@ -5,6 +5,7 @@ import Sidebar from "./EventServices/Sidebar";
 import EventNavigation from './EventServices/EventNavigation';
 import firebase from '../../../firbase';
 import { useAuth } from '../../Auth/AuthContext';
+import "../../HeroSection.css";
 
 
 const db = firebase.firestore();
@@ -43,9 +44,11 @@ function GlobalEventService() {
 
   return (
     <div className="app">
+      <div className='darkBg'>
         <EventNavigation globalEventId={globalEventId} userType={userType}/>
         {/* <h1 className="navigation">Navigation</h1> */}
         <Sidebar globalEventId={globalEventId} userType={userType} />
+        </div>
     </div>
 );
 

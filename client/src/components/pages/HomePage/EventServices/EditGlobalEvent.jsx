@@ -37,7 +37,6 @@ function EditGlobalEvent(props) {
 
 
     useEffect(() => {
-
         const docref = db.collection("globalEvents").doc(props.element.globalEventId);
         docref.get().then((doc) => {
             if(doc.exists) {

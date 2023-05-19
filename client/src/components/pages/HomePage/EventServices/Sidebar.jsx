@@ -14,6 +14,7 @@ import UpdateSpeakerProfile from './UpdateSpeakerProfile';
 import { set } from 'lodash';
 import HomePageEvent from './HomePageEvent';
 import OneToOneChat from './OneToOneChat';
+import "../../../HeroSection.css";
 
 const db = firebase.firestore();
 
@@ -71,7 +72,7 @@ const Sidebar = (props) => {
   };
 
   return (
-    <div className="sidebar">
+    <div className="sidebar darkBg">
       <ul>
         <li className={activeItem === 'Home' ? 'active' : ''} onClick={() => handleItemClick('Home')}>
           Home
@@ -79,7 +80,7 @@ const Sidebar = (props) => {
           {
             props.userType === 'Admin' && (
               <li className={activeItem === 'Agenda' ? 'active' : ''} onClick={() => handleItemClick('Agenda')}>
-                Agenda
+                Upload Sheet
               </li>
             )
           }

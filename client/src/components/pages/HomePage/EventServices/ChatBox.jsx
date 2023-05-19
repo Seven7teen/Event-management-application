@@ -28,6 +28,7 @@ const ChatBox = ({userType, globalEventId}) => {
   return (
     <>
     <main className="chat-box">
+      <h4>Community</h4>
       <div className="messages-wrapper">
         {messages?.map((message) => (
           <Message key={message.id} message={message} />

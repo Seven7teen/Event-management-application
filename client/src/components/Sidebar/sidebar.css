@@ -2,9 +2,12 @@
     background-color: #6f51ed;
     /* max-width: 50px; */
     border: 1px solid rgba(0,0,0,0.1);
-    text-align: center;
     display: flex;
     /* min-height: 700px; */
+}
+
+.sidebar li {
+    text-align: center;
 }
 
 .icon{

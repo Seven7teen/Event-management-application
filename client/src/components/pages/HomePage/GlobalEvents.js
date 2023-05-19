@@ -4,6 +4,9 @@ import { Link,useHistory } from 'react-router-dom';
 import { useAuth } from '../../Auth/AuthContext';
 import AddGlobalEvent from './EventServices/AddGlobalEvent';
 import EditGlobalEvent from './EventServices/EditGlobalEvent';
+import Navbar from '../../Navbar/Navbar';
+
+
 
 
 const db = firebase.firestore();
@@ -81,25 +84,49 @@ function GlobalEvents() {
             })
     },[]);
 
-    
+    const formatDates = (startDate,endDate) => {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const day1 = start.getDate();
+      const month1 = start.toLocaleString("default", { month: "short" });
+      const year1 = start.getFullYear();
+
+      const day2 = end.getDate();
+      const month2 = end.toLocaleString("default", { month: "short" });
+      const year2 = end.getFullYear();
+
+      // console.log("Day:", day2);
+      // console.log("Month:", month2);
+      // console.log("Year:", year2);
+      if(month2 === month1) {
+          return `${month2} ${day1} - ${day2}, ${year1}`;
+      }
+      return `${month1} ${day1} - ${month2} ${day2}, ${year1}`;
+    }
 
 
   return (
-    <>
+    <div className='darkBg'>
       {/* <EventCreationForm /> */}
-      <div>
-        <h1>Global Events</h1>
-        {/* <h1>sds editOpenArr[0]} sdsdd</h1> */}
+      <Navbar/>
+      <div style={{padding: "1rem", display: "flex", justifyContent: "space-between"}}>
+        <h3 style={{color: "#666677"}}>Global Events</h3>
+        {userType === 'Admin' && (
+          <button type="button" className="btn btn-success" onClick={() => handleAddEvent()}>Add Event</button>
+        )} 
         
       </div>
       {globalEventsData.map((item, index) => (
 
         <div className='session-event'>
         <div className="session-day" key={index}>
+        <div className='imgH5'>  
+                <img src={item.eventPictureUrl} alt='imggg'/>
+              </div>
         <div className="session-events">
-          <div className="session-event">
+          <div className="session-event" style={{borderBottom: "none"}}>
             <h4>{item.globalEventName ? item.globalEventName : 'null'}</h4>
-            <p>{item.startDate ? item.startDate : 'null'} - {item.endDate ? item.endDate : 'null'}</p>
+            <p>{item.startDate && item.endDate ? formatDates(item.startDate, item.endDate) : 'null'}</p>
           </div>
           <div className="session-buttons">
 
@@ -126,13 +153,9 @@ function GlobalEvents() {
         ))
         }
 
-        {userType === 'Admin' && (
-          <button type="button" className="btn btn-secondary btn-sm" onClick={() => handleAddEvent()}>Add Event</button>
-        )} 
-
         <AddGlobalEvent open={open} setOpen={setOpen} />
       
-    </>
+    </div>
   );
 }
 

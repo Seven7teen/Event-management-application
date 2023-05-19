@@ -82,7 +82,9 @@ const Attendees = (props) => {
                         </button> */}
                       </div>
                       <div class="modal-body">
-                      <img src={selectedElement.profilePicURL} alt='imggg' style={{borderRadius: "100%", width: "150px", height: "150px"}}/>
+                        <div style={{textAlign: "center"}}>
+                          <img src={selectedElement.profilePicURL} alt='imggg' style={{borderRadius: "100%", width: "150px", height: "150px"}}/>
+                        </div>
                       <p>Organization: {selectedElement.organization}</p> {/* Replace with the appropriate property */}
                         <p>Profession: {selectedElement.profession}</p>
                         <p>Bio: {selectedElement.bio}</p>

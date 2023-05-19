@@ -23,6 +23,7 @@ import SearchPage from "./SearchPage/SearchPage";
 import firebase from '../firbase';
 
 import Notifications from './Notifications/Notifications';
+import GlobalEvents from './pages/HomePage/GlobalEvents';
 // axios.defaults.withCredentials = true;
  
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/events" component={Events} />
           <Route path='/services' component={Services} />
           <Route path='/sign-up' component={Login} />
+          <Route path='/globalEvents' component={GlobalEvents} />
           <Route path='/calendar/:uid' 
             render={(props) => <HomePage val={val} setVal={setVal} {...props} />}
           />

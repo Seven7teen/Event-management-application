@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import firebase from "../../../../firbase";
 import { useAuth } from '../../../Auth/AuthContext';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 
 const db = firebase.firestore();
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
 const UpdateAttendeeProfile = (props) => {
+  const classes = useStyles();
   const {currentUser} = useAuth();
   const [attendeeName, setAttendeeName] = useState('');
   const [organization, setOrganization] = useState('');
@@ -103,57 +115,60 @@ const UpdateAttendeeProfile = (props) => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} className={classes.root} style={{backgroundColor: "#f2f1ef", padding: "1.5rem"}}>
 
-      <div className="mb-3">
-        <label htmlFor="attendeeName" className="form-label">Attendee Name:</label>
-        <input
-          type="text"
-          className="form-control"
-          id="attendeeName"
+      <label htmlFor="attendeeName">Attendee Name:</label>
+        <TextField
+          required id="attendeeName"
           value={attendeeName}
+          placeholder='attendeeName'
           onChange={(e) => setAttendeeName(e.target.value)}
         />
-      </div>
 
-      <div className="mb-3">
-        <label htmlFor="organization" className="form-label">Organization:</label>
-        <input
-          type="text"
-          className="form-control"
-          id="organization"
+      <label htmlFor="organization">Organization:</label>
+        <TextField
+          required id="organization"
           value={organization}
+          placeholder='organization'
           onChange={(e) => setOrganization(e.target.value)}
         />
-      </div>
 
-      <div className="mb-3">
-        <label htmlFor="profession" className="form-label">Profession:</label>
+
+        <label htmlFor="profession">Profession:</label>
+            <TextField
+              required id="profession"
+              value={profession}
+              placeholder='profession'
+              onChange={(e) => setProfesssion(e.target.value)}
+            />
+
+      <label htmlFor="profilePic">Profile Picture:</label>
         <input
-          type="text"
-          className="form-control"
-          id="profession"
-          value={profession}
-          onChange={(e) => setProfesssion(e.target.value)}
-        />
-      </div>
-
-      <div className='mb-3'>
-          <label for="bio">Example textarea</label>
-          <textarea className="form-control" id="bio" rows="3" value={bio}  onChange={(e) => setBio(e.target.value)}/>
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="profilePic" className="form-label">Profile Picture:</label>
-        <input
+        style={{display: "inline-block"}}
           type="file"
           className="form-control"
           id="profilePic"
           onChange={handleProfilePicChange}
         />
+
+      <div style={{width: "100%"}}>
+        <label htmlFor="bio">Bio:</label>
+        <TextField
+            id="bio"
+            placeholder="Bio(max 1000 char)"
+            multiline
+            // rows={4}
+            // variant="outlined"
+            value={bio}
+            onChange={(e) => setBio(e.target.value) }
+            inputProps={{maxLength: 1000}}
+            fullWidth
+        />
       </div>
 
-      <button type="submit" className="btn btn-primary">Submit</button>
+      {/* <div style={{textAlign: "center"}}> */}
+      <button type="submit" className="btn btn-success">Submit</button>
+    {/* </div> */}
     </form>
   );
 };
