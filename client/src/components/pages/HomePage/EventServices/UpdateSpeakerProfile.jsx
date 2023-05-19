@@ -138,7 +138,7 @@ const UpdateSpeakerProfile = (props) => {
 
       <label htmlFor="speakerName">Speaker Name:</label>
       <TextField required id="speakerName" placeholder="Name" value={speakerName} onChange={(e) => setSpeakerName(e.target.value)}/>
-
+      <br />
 
         <label htmlFor="speakerAffiliation">Affiliation:</label>
         <TextField
@@ -147,6 +147,7 @@ const UpdateSpeakerProfile = (props) => {
           placeholder='Affiliation'
           onChange={(e) => setSpeakerAffiliation(e.target.value)}
         />
+        <br />
 
       <label htmlFor="speakerEducation">Education:</label>
               <TextField
@@ -155,6 +156,7 @@ const UpdateSpeakerProfile = (props) => {
                 placeholder='Education'
                 onChange={(e) => setSpeakerEducation(e.target.value)}
               />
+              <br />
 
         <label htmlFor="speakerPosition">Position:</label>
               <TextField
@@ -163,6 +165,7 @@ const UpdateSpeakerProfile = (props) => {
                 placeholder='Position'
                 onChange={(e) => setSpeakerPosition(e.target.value)}
               />
+              <br />
 
       <label htmlFor="speakerLocation">Location:</label>
               <TextField
@@ -171,6 +174,7 @@ const UpdateSpeakerProfile = (props) => {
                 placeholder='Location'
                 onChange={(e) => setSpeakerLocation(e.target.value)}
               />
+              <br />
 
       <label htmlFor="speakerPersonalWebsites">Personal Websites:</label>
               <TextField
@@ -179,6 +183,7 @@ const UpdateSpeakerProfile = (props) => {
                 placeholder='Personal Websites'
                 onChange={(e) => setSpeakerPersonalWebsites(e.target.value)}
               />
+              <br />
 
         <label htmlFor="profilePic">Profile Picture:</label>
         <input
@@ -188,6 +193,7 @@ const UpdateSpeakerProfile = (props) => {
           id="profilePic"
           onChange={handleProfilePicChange}
         />
+        <br />
 
       {/* </div> */}
       <div style={{width: "100%"}}>

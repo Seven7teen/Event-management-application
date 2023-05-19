@@ -59,7 +59,7 @@ const SendMessage = ({ scroll, userType, globalEventId }) => {
     scroll.current.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <form onSubmit={(event) => sendMessage(event)} className="send-message">
+    <form onSubmit={(event) => sendMessage(event)} className="send-message" style={{width: "83%"}}>
       <label htmlFor="messageInput" hidden>
         Enter Message
       </label>

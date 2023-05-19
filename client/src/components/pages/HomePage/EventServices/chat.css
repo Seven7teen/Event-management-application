@@ -7,7 +7,7 @@
 }
 
 .messages-wrapper {
-    padding: 30px;
+    padding: 50px;
     /* margin: 60px 0 10px 0; */
     max-height: 90vh;
     overflow-y: scroll;

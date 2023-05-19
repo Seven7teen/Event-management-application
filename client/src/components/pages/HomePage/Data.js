@@ -45,11 +45,11 @@ export const homeObjFour = {
   lightText: false,
   lightTextDesc: false,
   topLine: 'Easy Management',
-  headline: 'Get a Reminder for every important meeting you don\'t wanna miss out',
+  headline: 'Join Events and manage your sessions and online meetings',
   description:
-    'Never ever have to worry again about forgetting important dates. We store your data, so you can get a reminder everytime.',
+    'Never ever have to worry again about loosing meeting links. We store your data, so you can manage your events.',
   buttonLabel: 'Sign Up Now',
   imgStart: 'start',
-  img: 'images/svg-8.svg',
+  img: 'images/svg-2.svg',
   alt: 'Vault'
 };
