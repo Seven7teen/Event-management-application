@@ -53,7 +53,7 @@ function HeroSection({
             </div>
             <div className='col img'>
               <div className='home__hero-img-wrapper'>
-              {/* <img src='images/other.jpg'/> */}
+              { topLine === 'Easy Management' && <img src={img} alt={alt} />}
               </div>
             </div>
           </div>

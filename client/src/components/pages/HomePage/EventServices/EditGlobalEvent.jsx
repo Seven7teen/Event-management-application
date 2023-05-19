@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import firebase from '../../../../firbase';
 import { useAuth } from '../../../Auth/AuthContext';
+import "./EditGlobalEvent.css";
 
 const db = firebase.firestore();
 
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '100%',
     },
   },
 }));
@@ -192,9 +193,12 @@ function EditGlobalEvent(props) {
                     <div><img style={{margin: "0 140px"}} src={picUrl} alt="imgggg" /></div>
                     
                     {/* <div style={{display: "block"}}> */}
+                    {/* <div className='inputElementForm'> */}
                     <label for="standard-basic title">Event Title:</label>
                     <TextField required id="standard-basic title" placeholder="Title" value={title} onChange={(e) => handleChange(e)}/>
+                    {/* </div> */}
                     
+                    {/* <div className='inputElementForm'> */}
                     <label for="standard-basic description">Event Description:</label>
                     <TextField
                         id="standard-basic description"
@@ -205,10 +209,13 @@ function EditGlobalEvent(props) {
                         value={desc}
                         onChange={(e) => handleChange(e) }
                         inputProps={{maxLength: 1000}}
-                        fullWidth
+                        // fullWidth
                         // style={{margin: "2% 0"}}
                     />
                     {/* </div> */}
+                    
+                    {/* </div> */}
+                    {/* <div className='inputElementForm'> */}
                     <label for="sponsors">Sponsors:</label>
                     <TextField
                         id="sponsors"
@@ -219,22 +226,35 @@ function EditGlobalEvent(props) {
                         value={sponsors}
                         onChange={(e) => handleChange(e) }
                         inputProps={{maxLength: 1000}}
-                        fullWidth
+                        // fullWidth
                         // style={{margin: "2% 0"}}
                     />
-                    <label for="start">Start date:</label>
+                    {/* </div> */}
+                    
+                     {/* <div className='inputElementForm'> */}
+                     <label for="start">Start date:</label>
                     <input type="date" id="start" name="trip-start"
                         min="2023-01-01" max="2023-12-31" value={startDate}  onChange={(e) => handleChange(e)}/>
+                    
+                    {/* </div> */}
+                    
+                    {/* <div className='inputElementForm'> */}
                     <label for="end">End date:</label>
                     <input type="date" id="end" name="trip-end" value={endDate}
                         min="2023-01-01" max="2023-12-31" onChange={(e) => handleChange(e)} />
-                    <label htmlFor="eventPicture" className="form-label">Event Picture:</label>
+                    
+                    {/* </div> */}
+                    
+                    {/* <div className='inputElementForm'> */}
+                    <label htmlFor="eventPicture">Event Picture:</label>
                         <input
                         type="file"
                         className="form-control"
                         id="eventPicture"
                         onChange={handleEventPictureChange}
                         />
+                    {/* </div> */}
+                    
                 </form>
             </DialogContent>
             <DialogActions>

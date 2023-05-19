@@ -17,9 +17,10 @@ body {
 
 .sidebar {
   display: flex  ;
-  min-height: 100vh  ; 
+  max-height: 88vh  ; 
+  /* margin-top: 100px; */
   /* width: 200px; */
-  /* overflow-y: scroll; */
+  /* overf8ow-y: scroll; */
 }
 
 .sidebar ul {
