@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '50%',
     },
   },
 }));
@@ -143,9 +143,9 @@ const Agenda = (props) => {
           setRawSessionsData(agendaData);
         };
       };
-
+    
     return (
-        <div className={classes.root} style={{backgroundColor: "#f2f1ef", padding: "1.5rem"}}>
+        <div className={classes.root} style={{backgroundColor: "#F7F8FA", padding: "1.5rem", boxShadow: "3px 3px 20px rgba(0, 0, 0, 0.2)" }}>
             {/* <div class="form-group">
                 <label for="attendees">Attendees File</label>
                 <input type="file" class="form-control fileDisplay" id="attendees" onChange={handleAttendeesFile} />

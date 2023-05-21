@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '100%',
     },
   },
 }));
@@ -110,7 +110,7 @@ function EditSession(props) {
         }
         else
         {
-            let sessionImageUrl = "images/conference.png";
+            let sessionImageUrl = "images/other.jpg";
             let updatedArr = [];
             if(sessionImage) {
 

@@ -115,7 +115,7 @@ const UpdateAttendeeProfile = (props) => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className={classes.root} style={{backgroundColor: "#f2f1ef", padding: "1.5rem"}}>
+    <form onSubmit={handleFormSubmit} className={classes.root} style={{backgroundColor: "#F7F8FA", padding: "1.5rem", boxShadow: "3px 3px 20px rgba(0, 0, 0, 0.2)"}}>
 
       <label htmlFor="attendeeName">Attendee Name:</label>
         <TextField
@@ -124,6 +124,7 @@ const UpdateAttendeeProfile = (props) => {
           placeholder='attendeeName'
           onChange={(e) => setAttendeeName(e.target.value)}
         />
+        <br />
 
       <label htmlFor="organization">Organization:</label>
         <TextField
@@ -132,6 +133,7 @@ const UpdateAttendeeProfile = (props) => {
           placeholder='organization'
           onChange={(e) => setOrganization(e.target.value)}
         />
+        <br />
 
 
         <label htmlFor="profession">Profession:</label>
@@ -141,6 +143,7 @@ const UpdateAttendeeProfile = (props) => {
               placeholder='profession'
               onChange={(e) => setProfesssion(e.target.value)}
             />
+            <br />
 
       <label htmlFor="profilePic">Profile Picture:</label>
         <input
@@ -150,6 +153,7 @@ const UpdateAttendeeProfile = (props) => {
           id="profilePic"
           onChange={handleProfilePicChange}
         />
+        {/* <br /> */}
 
       <div style={{width: "100%"}}>
         <label htmlFor="bio">Bio:</label>
@@ -167,6 +171,7 @@ const UpdateAttendeeProfile = (props) => {
       </div>
 
       {/* <div style={{textAlign: "center"}}> */}
+      <br />
       <button type="submit" className="btn btn-success">Submit</button>
     {/* </div> */}
     </form>
