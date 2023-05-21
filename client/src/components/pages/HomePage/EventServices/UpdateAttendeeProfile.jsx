@@ -115,7 +115,7 @@ const UpdateAttendeeProfile = (props) => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className={classes.root} style={{backgroundColor: "#f2f1ef", padding: "1.5rem"}}>
+    <form onSubmit={handleFormSubmit} className={classes.root} style={{backgroundColor: "#F7F8FA", padding: "1.5rem", boxShadow: "3px 3px 20px rgba(0, 0, 0, 0.2)"}}>
 
       <label htmlFor="attendeeName">Attendee Name:</label>
         <TextField

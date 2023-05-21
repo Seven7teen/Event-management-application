@@ -110,7 +110,7 @@ function EditSession(props) {
         }
         else
         {
-            let sessionImageUrl = "images/conference.png";
+            let sessionImageUrl = "images/other.jpg";
             let updatedArr = [];
             if(sessionImage) {
 

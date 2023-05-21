@@ -11,16 +11,20 @@ body {
   /* padding: 0 16px; */
 }
 
+body::-webkit-scrollbar{
+    display: none;
+  }
+
 .navigation {
   background-color: #A406B5  ;
 }
 
 .sidebar {
   display: flex  ;
-  max-height: 88vh  ; 
+  max-height: 90vh  ; 
   /* margin-top: 100px; */
   /* width: 200px; */
-  /* overf8ow-y: scroll; */
+  /* overflow-y: scroll; */
 }
 
 .sidebar ul {
@@ -52,6 +56,10 @@ body {
   padding: 20px  ;
   /* background-color: #e8ebf3  ; */
   /* overflow-y:auto; */
+}
+
+.main-content::-webkit-scrollbar{
+  display: none;
 }
 
 .session-tab {
@@ -139,6 +147,7 @@ body {
   background-color: #f8f8f8  ;
   font-size: 1.2rem  ;
   font-weight: bold  ;
+  min-width: max-content;
 }
 
 .imgH3 h3 {
@@ -217,7 +226,7 @@ body {
   width: auto  ;
   height: 100%  ;
   background-color: #fff  ;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2)  ;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2)  ;
 }
 
 .attendee-buttons button {
@@ -230,6 +239,7 @@ body {
   background-color: #f8f8f8  ;
   font-size: 1.2rem  ;
   font-weight: bold  ;
+  min-width: max-content;
 }
 
 .attendee-events {

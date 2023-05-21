@@ -66,7 +66,7 @@ const PersonalSendMessage = ({ scroll, user2Id }) => {
   };
 
   return (
-    <form onSubmit={(event) => sendMessage(event)} className="send-message">
+    <form onSubmit={(event) => sendMessage(event)} className="send-message" style={{width: "83%"}}>
       <label htmlFor="messageInput" hidden>
         Enter Message
       </label>

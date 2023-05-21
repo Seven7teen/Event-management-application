@@ -39,7 +39,7 @@
     width: auto  ;
     height: 100%  ;
     background-color: #fff  ;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2)  ;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2)  ;
   }
 
   .sponsor-events {
@@ -77,6 +77,7 @@
     background-color: #f8f8f8  ;
     font-size: 1.2rem  ;
     font-weight: bold  ;
+    min-width: max-content;
   }
 
   .imgH3 {
@@ -87,7 +88,7 @@
     background-image: url("asset/bg_1.jpg");
   
     /* Set a specific height */
-    /* min-height: 500px; */
+    min-height: 88vh;
   
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -112,5 +113,6 @@
   }
 
   .homePageNoback {
-    background-color: #f2f1ef;
+    background-color: #F7F8FA;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2) ;
   }

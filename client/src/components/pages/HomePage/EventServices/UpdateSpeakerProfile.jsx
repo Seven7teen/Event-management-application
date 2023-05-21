@@ -56,6 +56,7 @@ const UpdateSpeakerProfile = (props) => {
 
 
   const handleFormSubmit = async (e) => {
+    console.log("clicked");
     e.preventDefault();
 
     let profilePicUrl = "images/other.jpg";
@@ -134,7 +135,7 @@ const UpdateSpeakerProfile = (props) => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className={classes.root} style={{backgroundColor: "#f2f1ef", padding: "1.5rem"}}>
+    <form onSubmit={handleFormSubmit} className={classes.root} style={{backgroundColor: "#F7F8FA", padding: "1.5rem", boxShadow: "3px 3px 20px rgba(0, 0, 0, 0.2)"}}>
 
       <label htmlFor="speakerName">Speaker Name:</label>
       <TextField required id="speakerName" placeholder="Name" value={speakerName} onChange={(e) => setSpeakerName(e.target.value)}/>
