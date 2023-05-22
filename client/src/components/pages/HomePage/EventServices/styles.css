@@ -27,17 +27,18 @@ body::-webkit-scrollbar{
   /* overflow-y: scroll; */
 }
 
+
 .sidebar ul {
   list-style: none  ;
   margin: 0  ;
   padding: 0  ;
+  max-width: 30%  ;
   /* width: 200px; */
   /* background-color: #f2f1ef  ; */
 }
 
 .sidebar li {
   padding: 10px  ;
-  width: 200px  ;
   cursor: pointer  ;
   font-weight: 600;
   color: #666;
@@ -123,6 +124,7 @@ body::-webkit-scrollbar{
   display: flex  ;
   flex-direction: column  ;
   margin-top: 20px;
+  /* padding: 0 1rem 0 1rem; */
   /* overflow-x: scroll; */
   /* scroll-behavior: smooth; */
 }
@@ -130,8 +132,8 @@ body::-webkit-scrollbar{
 .session-day {
   display: flex;
   flex-direction: row  ;
-  margin: 0 1rem 0 1rem  ;
-  width: auto  ;
+  /* margin: 0 1rem 0 1rem  ; */
+  width: 100%  ;
   height: 100%  ;
   background-color: #fff  ;
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2)  ;

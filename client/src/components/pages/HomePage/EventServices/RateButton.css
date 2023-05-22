@@ -1,0 +1,9 @@
+.spacingLikeRate {
+    margin-left: 70%;
+}
+
+@media screen and (max-width: 991px) {
+    .spacingLikeRate {
+        margin-left: 40%;
+    }
+  }
