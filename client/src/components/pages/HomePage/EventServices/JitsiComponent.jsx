@@ -258,9 +258,9 @@ const JitsiComponent = (props) => {
             <header className="nav-bar">
                 <p className="item-left heading">{props.activeSession ? 'Live Session'  : 'Not Available'}</p>
             </header>
-                <div id="jitsi-iframe" style={{width: '1100px', marginLeft: "14px"}}></div>
+                <div id="jitsi-iframe" style={{width: '100%'}}></div>
             <div class="item-center">
-                <div style={{width: '900px', display: "flex", justifyContent: "flex-end"}}>
+                <div style={{width: '100%', display: "flex"}}>
                     <LikeButton activeSession={props.activeSession} globalEventId={props.globalEventId} />
                     <div style={{width: "40px"}}></div>
                     <RateButton activeSession={props.activeSession} globalEventId={props.globalEventId} />

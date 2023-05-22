@@ -4,6 +4,7 @@ import { useAuth } from '../../../Auth/AuthContext';
 import StarRatingComponent from 'react-star-rating-component';
 import { has } from 'lodash';
 import { BsFillStarFill } from "react-icons/bs";
+import "./RateButton.css";
 
 
 const db = firebase.firestore();
@@ -95,12 +96,12 @@ const RateButton = (props) => {
 
   return (
     <>
-    <span style={{marginRight: "630px", display: "flex", alignItems: "center"}}>
+    <span style={{display: "flex", alignItems: "center"}}>
       <BsFillStarFill style={{fontSize: "25px", color: "#FFB400"}}/>
       <span> {avgRating}</span>
       </span>
       {/* <div>{avgRating}</div> */}
-      <div>
+      <div className='spacingLikeRate'>
         <div>Your Rating</div>
       <StarRatingComponent 
           name="rate1" 

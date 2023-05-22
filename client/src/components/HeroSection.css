@@ -133,6 +133,6 @@ img {
 
 .home__hero-img-wrapper img {
   max-width: 555px;
-  width: auto;
+  width: 100%;
 
 }
